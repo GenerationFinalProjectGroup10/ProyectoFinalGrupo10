@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerController_Test : MonoBehaviour
 {
     private InputSystem_Actions controls;
     private Vector2 moveInput;
-    private CharacterController controller;
     private Animator animator;
 
     [SerializeField] private float speed = 5f;
@@ -14,7 +12,6 @@ public class PlayerController_Test : MonoBehaviour
     void Awake()
     {
         controls = new InputSystem_Actions();
-        controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
@@ -27,9 +24,11 @@ public class PlayerController_Test : MonoBehaviour
 
         animator.SetFloat("Horizontal", moveInput.x);
         animator.SetFloat("Vertical", moveInput.y);
+        
+        animator.SetBool("isMoving", moveInput.sqrMagnitude > 0);
 
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
 
-        controller.Move(moveDirection * speed * Time.deltaTime);
+        transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
     }
 }
