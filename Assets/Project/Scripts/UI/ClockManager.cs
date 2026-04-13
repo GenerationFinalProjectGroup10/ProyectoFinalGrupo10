@@ -24,40 +24,54 @@ public class ClockManager : MonoBehaviour
     [Tooltip("Segundos entre cada campanada cuando son varias horas.")]
     public float timeBetweenChimes = 1.2f;
 
-    //[Header("Eventos")]
-    // Otros scripts pueden suscribirse a este evento
-    public event Action<int> OnHourChime;   // envía la hora que sonó
-    public event Action<DateTime> OnMinuteTick; // cada minuto
+    // ─── Eventos ──────────────────────────────────────────────────────────────
+    public event Action<int> OnHourChime;
+    public event Action<DateTime> OnMinuteTick;
 
-    // ─── Estado interno ───────────────────────────────────────────────────────
+    /// <summary>Se dispara cuando el temporizador llega a 0.</summary>
+    public event Action OnTimerFinished;
+
+    // ─── Estado interno reloj ─────────────────────────────────────────────────
     private DateTime _currentTime;
     private int _lastHourChecked = -1;
     private int _lastMinuteChecked = -1;
     private bool _isChiming = false;
     private bool _chimeTriggered = false;
 
+    // ─── Temporizador regresivo ───────────────────────────────────────────────
+    private const float MaxTimerSeconds = 24f * 3600f;  // 24 h de juego en segundos
+    private float _timerRemainingSeconds = MaxTimerSeconds;
+    private bool _timerRunning = false;
+    private bool _timerFinished = false;
+
+    /// <summary>Segundos restantes en el temporizador.</summary>
+    public float TimerRemainingSeconds => _timerRemainingSeconds;
+
+    /// <summary>¿Está corriendo el temporizador?</summary>
+    public bool TimerIsRunning => _timerRunning;
+
+    /// <summary>¿Ya llegó a cero?</summary>
+    public bool TimerIsFinished => _timerFinished;
+
     // ─────────────────────────────────────────────────────────────────────────
 
     private void Awake()
     {
-        // Patrón Singleton: solo existirá una instancia de ClockManager
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject); // persiste entre escenas
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        // Inicializa la hora
-        _currentTime = useRealTime ? DateTime.Now : DateTime.Today.AddHours(3); // juego empieza a las 8am
+        _currentTime = useRealTime ? DateTime.Now : DateTime.Today.AddHours(3);
         _lastHourChecked = _currentTime.Hour;
         _lastMinuteChecked = _currentTime.Minute;
 
-        // Valida que el AudioSource exista
         if (chimeAudioSource == null)
         {
             chimeAudioSource = gameObject.AddComponent<AudioSource>();
@@ -70,21 +84,70 @@ public class ClockManager : MonoBehaviour
         AdvanceTime();
         CheckForHourChange();
         CheckForMinuteChange();
+        UpdateTimer();
     }
 
-    // ─── Avanzar el tiempo ────────────────────────────────────────────────────
+    // ─── Avanzar el tiempo del reloj ──────────────────────────────────────────
 
     private void AdvanceTime()
     {
         if (useRealTime)
-        {
             _currentTime = DateTime.Now;
-        }
         else
-        {
-            // Tiempo del juego: multiplica deltaTime por el multiplicador
             _currentTime = _currentTime.AddSeconds(Time.deltaTime * gameTimeMultiplier);
+    }
+
+    // ─── Temporizador regresivo ───────────────────────────────────────────────
+
+    private void UpdateTimer()
+    {
+        if (!_timerRunning || _timerFinished) return;
+
+        // Descontar al mismo ritmo que el tiempo de juego
+        float deltaGame = useRealTime ? Time.deltaTime : Time.deltaTime * gameTimeMultiplier;
+        _timerRemainingSeconds -= deltaGame;
+
+        if (_timerRemainingSeconds <= 0f)
+        {
+            _timerRemainingSeconds = 0f;
+            _timerRunning = false;
+            _timerFinished = true;
+            Debug.Log("[ClockManager] ¡Temporizador llegó a 0!");
+            OnTimerFinished?.Invoke();
         }
+    }
+
+    /// <summary>Inicia el temporizador (se llama automáticamente desde TimerUI).</summary>
+    public void TimerStart()
+    {
+        if (!_timerFinished)
+            _timerRunning = true;
+    }
+
+    /// <summary>Pausa el temporizador.</summary>
+    public void TimerPause()
+    {
+        _timerRunning = false;
+    }
+
+    /// <summary>Reinicia el temporizador a 24 h de juego.</summary>
+    public void TimerReset()
+    {
+        _timerRemainingSeconds = MaxTimerSeconds;
+        _timerRunning = false;
+        _timerFinished = false;
+    }
+
+    /// <summary>
+    /// Devuelve el tiempo restante desglosado en horas, minutos y segundos de juego.
+    /// </summary>
+    public (int hours, int minutes, int seconds) GetTimerTime()
+    {
+        int total = Mathf.FloorToInt(_timerRemainingSeconds);
+        int hours = total / 3600;
+        int minutes = (total % 3600) / 60;
+        int seconds = total % 60;
+        return (hours, minutes, seconds);
     }
 
     // ─── Detectar cambio de hora ──────────────────────────────────────────────
@@ -96,19 +159,14 @@ public class ClockManager : MonoBehaviour
         if (currentHour != _lastHourChecked)
         {
             _lastHourChecked = currentHour;
-            _chimeTriggered = false; // hora nueva, resetear bandera
+            _chimeTriggered = false;
         }
 
-        // Solo ejecuta si no ha sonado aún en esta hora y no está sonando
         if (!_chimeTriggered && !_isChiming)
         {
-            _chimeTriggered = true; // bloquear futuros disparos de esta hora
-
-            int chimesCount = 1;
-
-            Debug.Log($"[ClockManager] ¡Nueva hora! {currentHour}:00 → {chimesCount} campanada(s)");
-
-            StartCoroutine(PlayChimes(chimesCount));
+            _chimeTriggered = true;
+            Debug.Log($"[ClockManager] ¡Nueva hora! {currentHour}:00");
+            StartCoroutine(PlayChimes(1));
             OnHourChime?.Invoke(currentHour);
         }
     }
@@ -116,7 +174,6 @@ public class ClockManager : MonoBehaviour
     private void CheckForMinuteChange()
     {
         int currentMinute = _currentTime.Minute;
-
         if (currentMinute != _lastMinuteChecked)
         {
             _lastMinuteChecked = currentMinute;
@@ -124,7 +181,7 @@ public class ClockManager : MonoBehaviour
         }
     }
 
-    // ─── Corrutina: tocar N campanadas ────────────────────────────────────────
+    // ─── Corrutina: tocar campanadas ──────────────────────────────────────────
 
     private System.Collections.IEnumerator PlayChimes(int count)
     {
@@ -133,15 +190,10 @@ public class ClockManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             if (chimeClip != null)
-            {
                 chimeAudioSource.PlayOneShot(chimeClip);
-            }
             else
-            {
                 Debug.LogWarning("[ClockManager] No hay chimeClip asignado.");
-            }
 
-            // Esperar la duración de la campanada + pausa entre campanadas
             float waitTime = (chimeClip != null ? chimeClip.length : 0.5f) + timeBetweenChimes;
             yield return new WaitForSeconds(waitTime);
         }
@@ -151,10 +203,8 @@ public class ClockManager : MonoBehaviour
 
     // ─── Getters públicos ─────────────────────────────────────────────────────
 
-    /// <summary>Retorna la hora actual del reloj.</summary>
     public DateTime GetCurrentTime() => _currentTime;
 
-    /// <summary>Fuerza que el reloj toque las campanadas de una hora específica. Útil para pruebas.</summary>
     public void ForceChime(int hour)
     {
         int chimesCount = hour % 12;
