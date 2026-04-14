@@ -12,20 +12,33 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private InputAction interactAction;
 
-    void Awake()
+    void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-        
         // Obtener acciones
         interactAction = playerInput.actions["Interact"]; // Acción "E"
 
         inventory = new Inventory(); //Agregar al script del player
         uiInventory.SetInventory(inventory); //Agregar al script del player
 
-        ItemWorld.SpawnItemWorld(new Vector3(-4, 2, 2), new Item { itemType = Item.ItemType.Key, amount = 1 }); // Prueba de spawn
-        ItemWorld.SpawnItemWorld(new Vector3(2, 2, 2), new Item { itemType = Item.ItemType.Coin, amount = 1 }); // Prueba de spawn
+        /*ItemWorld.SpawnItemWorld(new Vector3(-4, 2, 2), new Item { itemType = Item.ItemType.Key, amount = 1 }); // Prueba de spawn
+        ItemWorld.SpawnItemWorld(new Vector3(2, 2, 2), new Item { itemType = Item.ItemType.Coin, amount = 1 }); // Prueba de spawn*/
+    }
+    void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
     }
 
+    //Agregar esta función al script del player
+    private void OnTriggerEnter(Collider collider)
+    {
+        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+        if (itemWorld != null)
+        {
+            // Touching Item
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+    }
     void Update()
     {
         // Leer input Movimiento

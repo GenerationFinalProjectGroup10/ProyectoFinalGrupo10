@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using TMPro;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -19,39 +21,50 @@ public class UI_Inventory : MonoBehaviour
     {
         this.inventory = inventory;
 
-        inventory.OnItemListChanged += RefreshInventoryItems;
+        // Suscripción correcta
+        inventory.OnItemListChanged += Inventory_OnItemListChanged;
+
         RefreshInventoryItems(); // Pintar al inicio
+    }
+
+    // Evento compatible con EventHandler
+    private void Inventory_OnItemListChanged(object sender, EventArgs e)
+    {
+        RefreshInventoryItems();
     }
 
     private void RefreshInventoryItems()
     {
-        // 🧠 1. Copiar y ordenar la lista correctamente
-        List<Item> items = new List<Item>(inventory.GetItemList());
-        items.Sort((a, b) => a.itemType.CompareTo(b.itemType));
-
-        // 🧹 2. Limpiar slots anteriores
+        // Limpia slots anteriores
         foreach (Transform child in itemSlotContainer)
         {
             if (child == itemSlotTemplate) continue;
             Destroy(child.gameObject);
         }
 
-        // 🎯 3. Crear slots nuevos
+        if (inventory == null) return;
+
+        // Copiar y ordenar la lista
+        List<Item> items = new List<Item>(inventory.GetItemList());
+        items.Sort((a, b) => a.itemType.CompareTo(b.itemType));
+
         int x = 0;
         int y = 0;
         float cellSize = 80f;
 
-        foreach (Item item in items) // ✅ USAR la lista ordenada
+        foreach (Item item in items)
         {
             RectTransform slotRect = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             slotRect.gameObject.SetActive(true);
 
-            // Posición en grilla
+            // Posición de grilla
             slotRect.anchoredPosition = new Vector2(x * cellSize, -y * cellSize);
 
-            // ⚠️ IMPORTANTE: nombre EXACTO del hijo
+            // Asignar sprite del item
             Image image = slotRect.Find("Image").GetComponent<Image>();
             image.sprite = item.GetSprite();
+            TextMeshProUGUI amountText = slotRect.Find("AmountText").GetComponent<TextMeshProUGUI>();
+            amountText.text = item.amount > 1 ? item.amount.ToString() : "";
 
             x++;
             if (x > 4)

@@ -10,6 +10,7 @@ public class ItemAssets : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public Sprite keySprite;
