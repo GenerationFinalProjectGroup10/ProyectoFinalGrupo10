@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement2 : MonoBehaviour
 {
     public float speed = 10f;
     public float interactionDistance = 3f;
