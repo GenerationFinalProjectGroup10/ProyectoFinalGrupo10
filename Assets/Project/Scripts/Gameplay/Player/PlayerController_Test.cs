@@ -25,7 +25,7 @@ public class PlayerController_Test : MonoBehaviour
         animator.SetFloat("Horizontal", moveInput.x);
         animator.SetFloat("Vertical", moveInput.y);
         
-        animator.SetBool("isMoving", moveInput.sqrMagnitude > 0);
+        animator.SetBool("IsMoving", moveInput.sqrMagnitude > 0);
 
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
 
