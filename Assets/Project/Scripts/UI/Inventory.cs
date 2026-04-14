@@ -12,10 +12,6 @@ public class Inventory
     {
         itemList = new List<Item>();
 
-        AddItem(new Item { itemType = Item.ItemType.Key, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Time, amount = 1 });
-
         Debug.Log(itemList.Count);
     }
 
@@ -23,30 +19,30 @@ public class Inventory
     {
         if (item.IsStackable())
         {
-            bool itemAlreadyInInventory = false;
             foreach (Item inventoryItem in itemList)
             {
                 if (inventoryItem.itemType == item.itemType)
                 {
-                    inventoryItem.amount += 1;
-                    itemAlreadyInInventory = true;
+                    inventoryItem.amount += 1; // SIEMPRE suma 1
+                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
+                    return;
                 }
             }
-            if (!itemAlreadyInInventory)
-            {
-                itemList.Add(item);
-            }
         }
-        else
+
+        // Nuevo item siempre inicia con 1
+        itemList.Add(new Item
         {
-            itemList.Add(item);
-        }
+            itemType = item.itemType,
+            amount = 1
+        });
+
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    // ⭐⭐ ESTE ERA EL MÉTODO QUE TE FALTABA ⭐⭐
     public List<Item> GetItemList()
     {
         return itemList;
     }
-
 }

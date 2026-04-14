@@ -30,15 +30,22 @@ public class PlayerMovement : MonoBehaviour
 
     //Agregar esta función al script del player
     private void OnTriggerEnter(Collider collider)
+{
+    ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+    if (itemWorld != null)
     {
-        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-        if (itemWorld != null)
-        {
-            // Touching Item
-            inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
-        }
+        // Obtener item del mundo
+        Item pickedItem = itemWorld.GetItem();
+
+        // Añadir una copia limpia
+        inventory.AddItem(new Item {
+            itemType = pickedItem.itemType,
+            amount = 1
+        });
+
+        itemWorld.DestroySelf();
     }
+}
     void Update()
     {
         // Leer input Movimiento

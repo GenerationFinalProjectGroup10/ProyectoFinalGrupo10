@@ -15,6 +15,16 @@ public class UI_Inventory : MonoBehaviour
     {
         itemSlotContainer = transform.Find("ItemSlotContainer");
         itemSlotTemplate = itemSlotContainer.Find("ItemSlotTemplate");
+
+        itemSlotTemplate.gameObject.SetActive(false);
+
+        Debug.Log("Template encontrado: " + itemSlotTemplate.name);
+    }
+
+    private void Start()
+    {
+        // Asegurar que el template nunca aparezca cuando inicie la escena
+        itemSlotTemplate.gameObject.SetActive(false);
     }
 
     public void SetInventory(Inventory inventory)
@@ -63,8 +73,17 @@ public class UI_Inventory : MonoBehaviour
             // Asignar sprite del item
             Image image = slotRect.Find("Image").GetComponent<Image>();
             image.sprite = item.GetSprite();
-            TextMeshProUGUI amountText = slotRect.Find("AmountText").GetComponent<TextMeshProUGUI>();
-            amountText.text = item.amount > 1 ? item.amount.ToString() : "";
+
+            // Muestra cantidad de items
+            TextMeshProUGUI uiText = slotRect.Find("AmountText").GetComponent<TextMeshProUGUI>();
+            if (item.amount > 1)
+            {
+                uiText.SetText(item.amount.ToString());
+            }
+            else
+            {
+                uiText.SetText("");
+            }
 
             x++;
             if (x > 4)
