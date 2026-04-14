@@ -58,17 +58,11 @@ public class UI_Inventory : MonoBehaviour
         List<Item> items = new List<Item>(inventory.GetItemList());
         items.Sort((a, b) => a.itemType.CompareTo(b.itemType));
 
-        int x = 0;
-        int y = 0;
-        float cellSize = 80f;
-
         foreach (Item item in items)
         {
             RectTransform slotRect = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             slotRect.gameObject.SetActive(true);
 
-            // Posición de grilla
-            slotRect.anchoredPosition = new Vector2(x * cellSize, -y * cellSize);
 
             // Asignar sprite del item
             Image image = slotRect.Find("Image").GetComponent<Image>();
@@ -85,12 +79,6 @@ public class UI_Inventory : MonoBehaviour
                 uiText.SetText("");
             }
 
-            x++;
-            if (x > 4)
-            {
-                x = 0;
-                y++;
-            }
         }
     }
 }
