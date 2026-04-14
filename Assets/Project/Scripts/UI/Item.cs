@@ -22,9 +22,9 @@ public class Item
         {
             default:
             case ItemType.Key: return ItemAssets.Instance.keySprite;
-            case ItemType.Clue: return ItemAssets.Instance.coinSprite;
-            case ItemType.Time: return ItemAssets.Instance.clueSprite;
-            case ItemType.Coin: return ItemAssets.Instance.timeSprite;
+            case ItemType.Coin: return ItemAssets.Instance.coinSprite;
+            case ItemType.Clue: return ItemAssets.Instance.clueSprite;
+            case ItemType.Time: return ItemAssets.Instance.timeSprite;
         }
     }
 }

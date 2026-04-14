@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
         inventory = new Inventory(); //Agregar al script del player
         uiInventory.SetInventory(inventory); //Agregar al script del player
 
-        ItemWorld.SpawnItemWorld(new Vector3(2, 0, 2), new Item { itemType = Item.ItemType.Key, amount = 1 }); // Prueba de spawn
-        ItemWorld.SpawnItemWorld(new Vector3(2, 0, 2), new Item { itemType = Item.ItemType.Coin, amount = 1 }); // Prueba de spawn
+        ItemWorld.SpawnItemWorld(new Vector3(-4, 2, 2), new Item { itemType = Item.ItemType.Key, amount = 1 }); // Prueba de spawn
+        ItemWorld.SpawnItemWorld(new Vector3(2, 2, 2), new Item { itemType = Item.ItemType.Coin, amount = 1 }); // Prueba de spawn
     }
 
     void Update()

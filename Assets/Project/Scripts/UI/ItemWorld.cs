@@ -4,6 +4,11 @@ public class ItemWorld : MonoBehaviour
 {
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
+        if (ItemAssets.Instance.pfItemWorld == null)
+        {
+            Debug.LogError("pfItemWorld not assigned in ItemAssets!");
+            return null;
+        }
         Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld, position, Quaternion.identity);
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
         itemWorld.SetItem(item);
