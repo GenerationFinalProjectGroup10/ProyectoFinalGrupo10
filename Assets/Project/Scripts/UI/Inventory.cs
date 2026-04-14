@@ -1,33 +1,48 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class Inventory
 {
+    public event EventHandler OnItemListChanged;
 
     private List<Item> itemList;
-    public event Action OnItemListChanged;
 
     public Inventory()
     {
         itemList = new List<Item>();
 
-        AddItem(new Item { itemType = Item.ItemType.Key, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Coin, amount = 1 });
-        AddItem(new Item { itemType = Item.ItemType.Time, amount = 1 });
-        Debug.Log(itemList.Count); 
+        Debug.Log(itemList.Count);
     }
 
-public void AddItem(Item item)
+    public void AddItem(Item item)
     {
-        itemList.Add(item);
-        OnItemListChanged?.Invoke();
+        if (item.IsStackable())
+        {
+            foreach (Item inventoryItem in itemList)
+            {
+                if (inventoryItem.itemType == item.itemType)
+                {
+                    inventoryItem.amount += 1; // SIEMPRE suma 1
+                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
+                    return;
+                }
+            }
+        }
+
+        // Nuevo item siempre inicia con 1
+        itemList.Add(new Item
+        {
+            itemType = item.itemType,
+            amount = 1
+        });
+
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-public List<Item> GetItemList()
+    // ⭐⭐ ESTE ERA EL MÉTODO QUE TE FALTABA ⭐⭐
+    public List<Item> GetItemList()
     {
         return itemList;
     }
-
 }
