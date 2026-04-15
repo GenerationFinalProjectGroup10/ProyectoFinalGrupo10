@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -284,6 +285,14 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("Fin del diálogo");
+        Debug.Log("Fin del diálogo - Cambiando a escena 2...");
+        // Opcional: esperar un poco antes de cambiar (para que se vea el último texto)
+        StartCoroutine(CambioConDelay());
+    }
+
+    IEnumerator CambioConDelay()
+    {
+        yield return new WaitForSeconds(1f); // espera 1 segundo (ajústalo)
+        SceneManager.LoadScene("Mundo1");
     }
 }
