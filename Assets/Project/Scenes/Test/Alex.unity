@@ -779,6 +779,53 @@ Transform:
   - {fileID: 881333917}
   m_Father: {fileID: 119746972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &72289643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 72289645}
+  - component: {fileID: 72289644}
+  m_Layer: 0
+  m_Name: SceneFader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &72289644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72289643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9acea173f47dbf54e8e9aa4d78d0d5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneFader
+  fadeImage: {fileID: 1196095929}
+  fadeInDuration: 11
+  fadeOutDuration: 5
+--- !u!4 &72289645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72289643}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 465.83362, y: 0, z: 476.53546}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &72451746 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f95b19d36d7cf214abc010da06ba9c4a, type: 3}
@@ -1659,6 +1706,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1206556108}
+  - {fileID: 1196095928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11429,6 +11477,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f95b19d36d7cf214abc010da06ba9c4a, type: 3}
   m_PrefabInstance: {fileID: 1831383587}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1196095927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1196095928}
+  - component: {fileID: 1196095930}
+  - component: {fileID: 1196095929}
+  m_Layer: 5
+  m_Name: BlackFade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1196095928
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196095927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.22, y: 4.22, z: 4.22}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 134111341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 221.28, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1196095929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196095927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1196095930
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196095927}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1197500006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13352,19 +13475,19 @@ MonoBehaviour:
     - optionText: No
       responseText: "No siempre elegimos\u2026 pero seguimos adelante."
       responseCharacterName: Maria
-      responseCharacterIcon: {fileID: 21300000, guid: 4f68b8de77f9b7a4da5f32f3678f7e65, type: 3}
+      responseCharacterIcon: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
       responseNameColor: {r: 0.5411765, g: 0.1686275, b: 0.8862746, a: 1}
       responseVoiceClip: {fileID: 0}
     - optionText: No me gusta este lugar
       responseText: Solo dale una oportunidad.
       responseCharacterName: Maria
-      responseCharacterIcon: {fileID: 21300000, guid: 4f68b8de77f9b7a4da5f32f3678f7e65, type: 3}
+      responseCharacterIcon: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
       responseNameColor: {r: 0.4, g: 0.2, b: 0.6, a: 1}
       responseVoiceClip: {fileID: 0}
     - optionText: "S\xED"
       responseText: "Eso es\u2026 todo va a estar bien."
       responseCharacterName: Maria
-      responseCharacterIcon: {fileID: 21300000, guid: 4f68b8de77f9b7a4da5f32f3678f7e65, type: 3}
+      responseCharacterIcon: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
       responseNameColor: {r: 0.4, g: 0.2, b: 0.6, a: 1}
       responseVoiceClip: {fileID: 0}
     voiceClip: {fileID: 0}
@@ -13376,22 +13499,24 @@ MonoBehaviour:
     - optionText: "S\xED"
       responseText: "Me alegra\u2026 sab\xEDa que te gustar\xEDa."
       responseCharacterName: Maria
-      responseCharacterIcon: {fileID: 21300000, guid: 4f68b8de77f9b7a4da5f32f3678f7e65, type: 3}
+      responseCharacterIcon: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
       responseNameColor: {r: 0.4, g: 0.2, b: 0.6, a: 1}
       responseVoiceClip: {fileID: 0}
     - optionText: No mucho
       responseText: "Bueno\u2026 ya te vas a acostumbrar."
       responseCharacterName: Maria
-      responseCharacterIcon: {fileID: 21300000, guid: 4f68b8de77f9b7a4da5f32f3678f7e65, type: 3}
+      responseCharacterIcon: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
       responseNameColor: {r: 0.4, g: 0.2, b: 0.6, a: 1}
       responseVoiceClip: {fileID: 0}
     - optionText: Quiero volver
       responseText: "\u2026No podemos volver."
       responseCharacterName: Maria
-      responseCharacterIcon: {fileID: 21300000, guid: 4f68b8de77f9b7a4da5f32f3678f7e65, type: 3}
+      responseCharacterIcon: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
       responseNameColor: {r: 0.4, g: 0.2, b: 0.6, a: 1}
       responseVoiceClip: {fileID: 0}
     voiceClip: {fileID: 0}
+  sceneFader: {fileID: 72289644}
+  nextSceneName: Mundo1
 --- !u!4 &1312767587
 Transform:
   m_ObjectHideFlags: 0
@@ -21610,3 +21735,4 @@ SceneRoots:
   - {fileID: 1962699587}
   - {fileID: 119746972}
   - {fileID: 1992406749}
+  - {fileID: 72289645}

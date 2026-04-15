@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject choicesPanel;
     public Button[] choiceButtons;
 
-    [Header("Canvas Fade")]
+    [Header("Canvas Fade UI")]
     public CanvasGroup dialogueCanvasGroup;
     public float fadeDuration = 2f;
     public float delayBeforeStart = 2f;
@@ -28,23 +27,26 @@ public class DialogueManager : MonoBehaviour
     [Header("Data")]
     public DialogueNode[] nodes;
 
+    [Header("Scene Control")]
+    public SceneFader sceneFader;
+    public string nextSceneName = "Mundo1";
+
     private int currentNode = 0;
     private Coroutine typingCoroutine;
-    private bool isTyping = false;
     private bool waitingForChoice = false;
 
     private string currentFullText;
     private DialogueOption currentOption;
 
+    private bool isInResponse = false;
+
     void Start()
     {
         choicesPanel.SetActive(false);
 
-        // 🔥 limpiar UI completamente
         nameText.text = "";
         dialogueText.text = "";
 
-        // 🔥 evitar icono blanco
         speakerIcon.sprite = null;
         speakerIcon.enabled = false;
 
@@ -54,35 +56,8 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(IntroSequence());
     }
 
-    void Update()
-    {
-        if (waitingForChoice) return;
-
-        if (Input.GetKeyDown(KeyCode.Space) && isTyping)
-        {
-            CompleteText();
-        }
-
-        if (Input.GetMouseButtonDown(0) && isTyping)
-        {
-            CompleteText();
-        }
-    }
-
-    void CompleteText()
-    {
-        StopCoroutine(typingCoroutine);
-        dialogueText.text = currentFullText;
-        isTyping = false;
-    }
-
     IEnumerator IntroSequence()
     {
-        // 🔥 asegurar todo limpio antes del fade
-        nameText.text = "";
-        dialogueText.text = "";
-        speakerIcon.enabled = false;
-
         yield return new WaitForSeconds(delayBeforeStart);
 
         float time = 0;
@@ -96,9 +71,6 @@ public class DialogueManager : MonoBehaviour
 
             yield return null;
         }
-
-        if (dialogueCanvasGroup != null)
-            dialogueCanvasGroup.alpha = 1;
 
         yield return new WaitForSeconds(0.3f);
 
@@ -115,19 +87,19 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueNode node = nodes[currentNode];
 
+        isInResponse = false;
+
         dialogueText.text = "";
 
         nameText.text = node.characterName;
         nameText.color = node.nameColor;
 
-        // 🔥 activar icono SOLO cuando ya hay datos
         speakerIcon.sprite = node.characterIcon;
         speakerIcon.enabled = true;
 
         choicesPanel.SetActive(false);
         waitingForChoice = false;
 
-        // 🔊 audio madre
         if (node.voiceClip != null && audioSource != null)
         {
             audioSource.clip = node.voiceClip;
@@ -144,7 +116,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeText(string text)
     {
-        isTyping = true;
         dialogueText.text = "";
 
         foreach (char letter in text)
@@ -153,7 +124,6 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        isTyping = false;
         ShowChoices();
     }
 
@@ -172,13 +142,13 @@ public class DialogueManager : MonoBehaviour
                 {
                     choiceButtons[i].gameObject.SetActive(true);
 
-                    int index = i;
-
                     TMP_Text buttonText = choiceButtons[i].GetComponentInChildren<TMP_Text>();
                     buttonText.text = node.options[i].optionText;
 
                     choiceButtons[i].onClick.RemoveAllListeners();
-                    choiceButtons[i].onClick.AddListener(() => SelectOption(index));
+
+                    int capturedIndex = i;
+                    choiceButtons[i].onClick.AddListener(() => SelectOption(capturedIndex));
                 }
                 else
                 {
@@ -200,7 +170,9 @@ public class DialogueManager : MonoBehaviour
 
         choicesPanel.SetActive(false);
 
-        // 👶 NIÑA HABLA (lo que elegiste)
+        isInResponse = true;
+
+        // 👶 niña habla
         nameText.text = currentOption.responseCharacterName;
         nameText.color = currentOption.responseNameColor;
 
@@ -214,7 +186,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypePlayerLine(string text)
     {
-        isTyping = true;
         dialogueText.text = "";
 
         foreach (char letter in text)
@@ -222,8 +193,6 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-
-        isTyping = false;
 
         yield return new WaitForSeconds(1f);
 
@@ -240,7 +209,6 @@ public class DialogueManager : MonoBehaviour
         speakerIcon.sprite = node.characterIcon;
         speakerIcon.enabled = true;
 
-        // 🔊 audio madre
         if (node.voiceClip != null && audioSource != null)
         {
             audioSource.clip = node.voiceClip;
@@ -257,7 +225,6 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeResponse(string text)
     {
-        isTyping = true;
         dialogueText.text = "";
 
         foreach (char letter in text)
@@ -265,8 +232,6 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-
-        isTyping = false;
 
         yield return new WaitForSeconds(1.5f);
 
@@ -285,14 +250,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("Fin del diálogo - Cambiando a escena 2...");
-        // Opcional: esperar un poco antes de cambiar (para que se vea el último texto)
-        StartCoroutine(CambioConDelay());
-    }
-
-    IEnumerator CambioConDelay()
-    {
-        yield return new WaitForSeconds(1f); // espera 1 segundo (ajústalo)
-        SceneManager.LoadScene("Mundo1");
+        if (sceneFader != null)
+            sceneFader.FadeToScene(nextSceneName);
     }
 }
