@@ -1,44 +1,23 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Item
+public class ItemAssets : MonoBehaviour
 {
 
-    public enum ItemType
+    public static ItemAssets Instance { get; private set; }
+
+    private void Awake()
     {
-        Key,
-        Coin,
-        Time,
-        Clue,
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    public ItemType itemType;
-    public int amount;
+    public Sprite keySprite;
+    public Sprite coinSprite;
+    public Sprite clueSprite;
+    public Sprite timeSprite;
 
-    public Sprite GetSprite()
-    {
-        switch (itemType)
-        {
-            default:
-            case ItemType.Key: return ItemAssets.Instance.keySprite;
-            case ItemType.Coin: return ItemAssets.Instance.coinSprite;
-            case ItemType.Clue: return ItemAssets.Instance.clueSprite;
-            case ItemType.Time: return ItemAssets.Instance.timeSprite;
-        }
-    }
+    public Transform pfItemWorld;
 
-    public bool IsStackable()
-    {
-        switch (itemType)
-        {
-            case ItemType.Time:
-                return false; // El tiempo NO se suma
-
-            default:
-                return true;  // Todo lo demás se suma
-        }
-    }
 }

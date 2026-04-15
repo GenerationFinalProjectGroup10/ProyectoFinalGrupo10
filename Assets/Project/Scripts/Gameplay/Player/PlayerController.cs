@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
-    public float interactionDistance = 3f;
+    public float interactionDistance = 3f; //Agregar al script del player
     [SerializeField] private UI_Inventory uiInventory; //Agregar al script del player
 
     private Inventory inventory; //Agregar al script del player
@@ -12,48 +12,122 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private InputAction interactAction;
 
-    void Start()
-    {
-        // Obtener acciones
-        interactAction = playerInput.actions["Interact"]; // Acción "E"
+    // 🔥 Lista de interactuables dentro del trigger
+    private readonly System.Collections.Generic.List<IInteractable> interactables = new System.Collections.Generic.List<IInteractable>();
+    private IInteractable currentInteractable;
 
-        inventory = new Inventory(); //Agregar al script del player
-        uiInventory.SetInventory(inventory); //Agregar al script del player
-
-        /*ItemWorld.SpawnItemWorld(new Vector3(-4, 2, 2), new Item { itemType = Item.ItemType.Key, amount = 1 }); // Prueba de spawn
-        ItemWorld.SpawnItemWorld(new Vector3(2, 2, 2), new Item { itemType = Item.ItemType.Coin, amount = 1 }); // Prueba de spawn*/
-    }
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
     }
 
-    //Agregar esta función al script del player
-    private void OnTriggerEnter(Collider collider)
-{
-    ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-    if (itemWorld != null)
+    void Start()
     {
-        // Obtener item del mundo
-        Item pickedItem = itemWorld.GetItem();
+        // Obtener acciones
+        interactAction = playerInput.actions["Interact"]; // Acción "E"
 
-        // Añadir una copia limpia
-        inventory.AddItem(new Item {
-            itemType = pickedItem.itemType,
-            amount = 1
-        });
+        // Usar inventario global único
+        inventory = InventoryManager.Instance.inventory;
 
-        itemWorld.DestroySelf();
+        if (uiInventory != null)
+        {
+            uiInventory.SetInventory(inventory);
+        }
+        else
+        {
+            Debug.LogWarning("UI_Inventory no está asignado en PlayerController.");
+        }
     }
-}
+
     void Update()
     {
-        // Leer input Movimiento
+        // Movimiento
         moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
 
-        // Movimiento
         Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y);
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
+        // 🔥 INTERACCIÓN CON E
+        if (interactAction.triggered)
+        {
+            //Agregar al script del player
+            if (currentInteractable != null)
+            {
+                currentInteractable.Interact(this);
+            }
+        }
     }
 
+    // 🔥 Detecta entrada a zona de interacción
+    private void OnTriggerEnter(Collider other)
+    {
+        if (TryGetInteractable(other, out IInteractable interactable))
+        {
+            if (!interactables.Contains(interactable))
+            {
+                interactables.Add(interactable);
+            }
+            currentInteractable = interactable;
+            Debug.Log("Interactuable detectado: " + other.name);
+        }
+
+        // Agregar al script del player
+        ItemWorld itemWorld = other.GetComponent<ItemWorld>();
+        if (itemWorld == null)
+        {
+            itemWorld = other.GetComponentInParent<ItemWorld>();
+        }
+
+        if (itemWorld != null)
+        {
+            Item pickedItem = itemWorld.GetItem();
+
+            if (pickedItem != null)
+            {
+                inventory.AddItem(new Item
+                {
+                    itemType = pickedItem.itemType,
+                    amount = 1
+                });
+            }
+
+            itemWorld.DestroySelf();
+        }
+    }
+
+    // 🔥 Salir de zona de interacción
+    private void OnTriggerExit(Collider other)
+    {
+        if (TryGetInteractable(other, out IInteractable interactable))
+        {
+            interactables.Remove(interactable);
+            if (interactables.Count > 0)
+            {
+                currentInteractable = interactables[interactables.Count - 1];
+            }
+            else
+            {
+                currentInteractable = null;
+            }
+
+            Debug.Log("Saliste del interactuable: " + other.name);
+        }
+    }
+
+    private bool TryGetInteractable(Collider other, out IInteractable interactable)
+    {
+        interactable = other.GetComponent(typeof(IInteractable)) as IInteractable;
+        if (interactable != null)
+        {
+            return true;
+        }
+
+        interactable = other.GetComponentInParent(typeof(IInteractable)) as IInteractable;
+        return interactable != null;
+    }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
 }
