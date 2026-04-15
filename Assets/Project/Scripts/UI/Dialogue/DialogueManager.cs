@@ -33,16 +33,19 @@ public class DialogueManager : MonoBehaviour
     private bool waitingForChoice = false;
 
     private string currentFullText;
-
-    // 🔥 NUEVO
     private DialogueOption currentOption;
 
     void Start()
     {
         choicesPanel.SetActive(false);
 
+        // 🔥 limpiar UI completamente
         nameText.text = "";
         dialogueText.text = "";
+
+        // 🔥 evitar icono blanco
+        speakerIcon.sprite = null;
+        speakerIcon.enabled = false;
 
         if (dialogueCanvasGroup != null)
             dialogueCanvasGroup.alpha = 0;
@@ -74,6 +77,11 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator IntroSequence()
     {
+        // 🔥 asegurar todo limpio antes del fade
+        nameText.text = "";
+        dialogueText.text = "";
+        speakerIcon.enabled = false;
+
         yield return new WaitForSeconds(delayBeforeStart);
 
         float time = 0;
@@ -91,7 +99,7 @@ public class DialogueManager : MonoBehaviour
         if (dialogueCanvasGroup != null)
             dialogueCanvasGroup.alpha = 1;
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
 
         StartDialogue();
     }
@@ -110,7 +118,10 @@ public class DialogueManager : MonoBehaviour
 
         nameText.text = node.characterName;
         nameText.color = node.nameColor;
+
+        // 🔥 activar icono SOLO cuando ya hay datos
         speakerIcon.sprite = node.characterIcon;
+        speakerIcon.enabled = true;
 
         choicesPanel.SetActive(false);
         waitingForChoice = false;
@@ -176,7 +187,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // 🔥 AQUÍ ESTÁ EL CAMBIO IMPORTANTE
     void SelectOption(int optionIndex)
     {
         DialogueNode node = nodes[currentNode];
@@ -189,17 +199,18 @@ public class DialogueManager : MonoBehaviour
 
         choicesPanel.SetActive(false);
 
-        // 👶 NIÑA HABLA (LO QUE ELEGISTE)
+        // 👶 NIÑA HABLA (lo que elegiste)
         nameText.text = currentOption.responseCharacterName;
         nameText.color = currentOption.responseNameColor;
+
         speakerIcon.sprite = currentOption.responseCharacterIcon;
+        speakerIcon.enabled = true;
 
         currentFullText = currentOption.optionText;
 
         typingCoroutine = StartCoroutine(TypePlayerLine(currentFullText));
     }
 
-    // 👶 TEXTO DEL JUGADOR
     IEnumerator TypePlayerLine(string text)
     {
         isTyping = true;
@@ -215,18 +226,18 @@ public class DialogueManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        // 👩 MADRE RESPONDE
         ShowMotherResponse();
     }
 
-    // 👩 RESPUESTA MADRE
     void ShowMotherResponse()
     {
         DialogueNode node = nodes[currentNode];
 
         nameText.text = node.characterName;
         nameText.color = node.nameColor;
+
         speakerIcon.sprite = node.characterIcon;
+        speakerIcon.enabled = true;
 
         // 🔊 audio madre
         if (node.voiceClip != null && audioSource != null)
