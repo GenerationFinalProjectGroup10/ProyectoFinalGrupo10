@@ -61,6 +61,11 @@ public class UI_Inventory : MonoBehaviour
         foreach (Item item in items)
         {
             RectTransform slotRect = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+
+            // Resetear posición para que el Grid Layout Group tome control
+            slotRect.localPosition = Vector3.zero;
+            slotRect.localScale = Vector3.one;
+
             slotRect.gameObject.SetActive(true);
 
 
