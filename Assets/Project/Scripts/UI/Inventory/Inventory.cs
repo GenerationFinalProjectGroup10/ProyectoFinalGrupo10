@@ -1,75 +1,50 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Inventory
 {
-    public event EventHandler OnItemListChanged;
+    public List<InventoryItem> items = new List<InventoryItem>();
+    public event Action OnInventoryChanged;
 
-    private List<Item> itemList;
-
-    public Inventory()
+    public void AddItem(ItemSO item, int amount)
     {
-        itemList = new List<Item>();
-    }
+        if (item == null || amount <= 0) return;
 
-    public void AddItem(Item item)
-    {
-        if (item.IsStackable())
-        {
-            foreach (Item inventoryItem in itemList)
-            {
-                if (inventoryItem.itemType == item.itemType)
-                {
-                    inventoryItem.amount += 1; // SIEMPRE suma 1
-                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
-                    return;
-                }
-            }
-        }
+        InventoryItem existing = items.Find(i => i.item == item);
 
-        // Nuevo item siempre inicia con 1
-        itemList.Add(new Item
-        {
-            itemType = item.itemType,
-            amount = 1
-        });
-
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void RemoveItem(Item item)
-    {
-        if (item.IsStackable())
-        {
-            foreach (Item inventoryItem in itemList)
-            {
-                if (inventoryItem.itemType == item.itemType && inventoryItem.amount > 0)
-                {
-                    inventoryItem.amount -= 1;
-                    if (inventoryItem.amount <= 0)
-                    {
-                        itemList.Remove(inventoryItem);
-                    }
-                    OnItemListChanged?.Invoke(this, EventArgs.Empty);
-                    return;
-                }
-            }
-        }
+        if (existing != null)
+            existing.amount += amount;
         else
-        {
-            // For non-stackable, remove the first occurrence
-            Item toRemove = itemList.Find(i => i.itemType == item.itemType);
-            if (toRemove != null)
-            {
-                itemList.Remove(toRemove);
-                OnItemListChanged?.Invoke(this, EventArgs.Empty);
-            }
-        }
+            items.Add(new InventoryItem { item = item, amount = amount });
+
+        OnInventoryChanged?.Invoke();
     }
 
-    public List<Item> GetItemList()
+    public bool HasItem(ItemSO item, int amount)
     {
-        return new List<Item>(itemList);
+        if (item == null || amount <= 0) return false;
+
+        InventoryItem existing = items.Find(i => i.item == item);
+        return existing != null && existing.amount >= amount;
+    }
+
+    public bool RemoveItem(ItemSO item, int amount)
+    {
+        if (item == null || amount <= 0) return false;
+
+        InventoryItem existing = items.Find(i => i.item == item);
+
+        if (existing != null && existing.amount >= amount)
+        {
+            existing.amount -= amount;
+
+            if (existing.amount <= 0)
+                items.Remove(existing);
+
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
+        return false;
     }
 }
