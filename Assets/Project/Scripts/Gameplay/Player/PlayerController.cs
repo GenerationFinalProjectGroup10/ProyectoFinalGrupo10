@@ -4,56 +4,94 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
-    public float interactionDistance = 3f;
-    [SerializeField] private UI_Inventory uiInventory; //Agregar al script del player
 
-    private Inventory inventory; //Agregar al script del player
+    [Header("Raycast Settings")]
+    public Transform rayOrigin;
+    public float rayDistance = 3f;
+    public LayerMask interactableLayer;
+
     private PlayerInput playerInput;
     private Vector2 moveInput;
     private InputAction interactAction;
+    private RaycastHit lastHit;
+
+    [SerializeField] private ItemSO clueItem;
+    [SerializeField] private ItemSO keyItem;
 
     void Start()
     {
-        // Obtener acciones
-        interactAction = playerInput.actions["Interact"]; // Acción "E"
-
-        inventory = new Inventory(); //Agregar al script del player
-        uiInventory.SetInventory(inventory); //Agregar al script del player
-
-        /*ItemWorld.SpawnItemWorld(new Vector3(-4, 2, 2), new Item { itemType = Item.ItemType.Key, amount = 1 }); // Prueba de spawn
-        ItemWorld.SpawnItemWorld(new Vector3(2, 2, 2), new Item { itemType = Item.ItemType.Coin, amount = 1 }); // Prueba de spawn*/
-    }
-    void Awake()
-    {
         playerInput = GetComponent<PlayerInput>();
+
+        if (playerInput == null)
+        {
+            Debug.LogError("PlayerController: No hay un PlayerInput en el Player");
+            return;
+        }
+
+        interactAction = playerInput.actions["Interact"];
     }
 
-    //Agregar esta función al script del player
-    private void OnTriggerEnter(Collider collider)
-{
-    ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-    if (itemWorld != null)
-    {
-        // Obtener item del mundo
-        Item pickedItem = itemWorld.GetItem();
-
-        // Añadir una copia limpia
-        inventory.AddItem(new Item {
-            itemType = pickedItem.itemType,
-            amount = 1
-        });
-
-        itemWorld.DestroySelf();
-    }
-}
     void Update()
     {
-        // Leer input Movimiento
-        moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        HandleRaycast();
+        HandleClueCombination();
 
-        // Movimiento
+        if (interactAction != null && interactAction.WasPressedThisFrame())
+            TryInteract();
+
+        moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y);
+
+        if (movement != Vector3.zero)
+            transform.forward = movement;
+
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
     }
 
+    void HandleRaycast()
+    {
+        if (rayOrigin == null || InventoryManager.Instance == null)
+            return;
+
+        Debug.DrawRay(rayOrigin.position, rayOrigin.forward * rayDistance, Color.red);
+
+        if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out RaycastHit hit, rayDistance, interactableLayer))
+        {
+            if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
+            {
+                UI_Message.Instance?.Show(interactable.GetInteractMessage(), persistent: true);
+                lastHit = hit;
+                return;
+            }
+        }
+
+        lastHit = default;
+        UI_Message.Instance?.Hide();
+    }
+
+    void TryInteract()
+    {
+        if (lastHit.collider == null) return;
+
+        if (lastHit.collider.TryGetComponent<IInteractable>(out var interactable))
+            interactable.Interact(this);
+    }
+
+    void HandleClueCombination()
+    {
+        if (InventoryManager.Instance == null || clueItem == null || keyItem == null)
+            return;
+
+        if (!InventoryManager.Instance.inventory.HasItem(clueItem, 2))
+            return;
+
+        UI_Message.Instance?.Show("Presiona C para combinar pistas", persistent: true);
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            InventoryManager.Instance.inventory.RemoveItem(clueItem, 2);
+            InventoryManager.Instance.inventory.AddItem(keyItem, 1);
+            UI_Message.Instance?.Show("¡Pistas combinadas! nueva llave obtenida");
+        }
+    }
 }

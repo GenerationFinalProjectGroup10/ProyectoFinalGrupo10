@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
 using TMPro;
 
 public class UI_Inventory : MonoBehaviour
@@ -14,76 +10,69 @@ public class UI_Inventory : MonoBehaviour
     private void Awake()
     {
         itemSlotContainer = transform.Find("ItemSlotContainer");
+
+        if (itemSlotContainer == null)
+        {
+            Debug.LogError("UI_Inventory: No se encontró 'ItemSlotContainer'");
+            return;
+        }
+
         itemSlotTemplate = itemSlotContainer.Find("ItemSlotTemplate");
 
-        itemSlotTemplate.gameObject.SetActive(false);
+        if (itemSlotTemplate == null)
+        {
+            Debug.LogError("UI_Inventory: No se encontró 'ItemSlotTemplate'");
+            return;
+        }
 
-        Debug.Log("Template encontrado: " + itemSlotTemplate.name);
+        itemSlotTemplate.gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        // Asegurar que el template nunca aparezca cuando inicie la escena
-        itemSlotTemplate.gameObject.SetActive(false);
+        if (InventoryManager.Instance != null)
+            SetInventory(InventoryManager.Instance.inventory);
+        else
+            Debug.LogError("UI_Inventory: No existe InventoryManager.Instance");
+    }
+
+    private void OnDestroy()
+    {
+        if (inventory != null)
+            inventory.OnInventoryChanged -= RefreshUI;
     }
 
     public void SetInventory(Inventory inventory)
     {
+        if (this.inventory != null)
+            this.inventory.OnInventoryChanged -= RefreshUI;
+
         this.inventory = inventory;
 
-        // Suscripción correcta
-        inventory.OnItemListChanged += Inventory_OnItemListChanged;
-
-        RefreshInventoryItems(); // Pintar al inicio
+        if (this.inventory != null)
+        {
+            this.inventory.OnInventoryChanged += RefreshUI;
+            RefreshUI();
+        }
     }
 
-    // Evento compatible con EventHandler
-    private void Inventory_OnItemListChanged(object sender, EventArgs e)
+    private void RefreshUI()
     {
-        RefreshInventoryItems();
-    }
+        if (inventory == null || itemSlotContainer == null || itemSlotTemplate == null) return;
 
-    private void RefreshInventoryItems()
-    {
-        // Limpia slots anteriores
         foreach (Transform child in itemSlotContainer)
         {
             if (child == itemSlotTemplate) continue;
             Destroy(child.gameObject);
         }
 
-        if (inventory == null) return;
-
-        // Copiar y ordenar la lista
-        List<Item> items = new List<Item>(inventory.GetItemList());
-        items.Sort((a, b) => a.itemType.CompareTo(b.itemType));
-
-        foreach (Item item in items)
+        foreach (InventoryItem invItem in inventory.items)
         {
-            RectTransform slotRect = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
+            Transform slot = Instantiate(itemSlotTemplate, itemSlotContainer);
+            slot.gameObject.SetActive(true);
 
-            // Resetear posición para que el Grid Layout Group tome control
-            slotRect.localPosition = Vector3.zero;
-            slotRect.localScale = Vector3.one;
-
-            slotRect.gameObject.SetActive(true);
-
-
-            // Asignar sprite del item
-            Image image = slotRect.Find("Image").GetComponent<Image>();
-            image.sprite = item.GetSprite();
-
-            // Muestra cantidad de items
-            TextMeshProUGUI uiText = slotRect.Find("AmountText").GetComponent<TextMeshProUGUI>();
-            if (item.amount > 1)
-            {
-                uiText.SetText(item.amount.ToString());
-            }
-            else
-            {
-                uiText.SetText("");
-            }
-
+            slot.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = invItem.item.icon;
+            slot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = invItem.amount.ToString();
         }
     }
 }
