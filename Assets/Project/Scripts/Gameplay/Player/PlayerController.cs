@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,9 +9,9 @@ public class PlayerController : MonoBehaviour
     public float rayDistance = 3f;
     public LayerMask interactableLayer;
 
-    private PlayerInput playerInput;
-    private Vector2 moveInput;
-    private InputAction interactAction;
+    private Vector2 input;
+    private Rigidbody rb;
+    private Animator animator;
     private RaycastHit lastHit;
 
     [SerializeField] private ItemSO clueItem;
@@ -20,32 +19,48 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
 
-        if (playerInput == null)
+        if (rb == null)
         {
-            Debug.LogError("PlayerController: No hay un PlayerInput en el Player");
+            Debug.LogError("PlayerController: No hay un Rigidbody en el Player");
             return;
         }
 
-        interactAction = playerInput.actions["Interact"];
+        if (animator == null)
+        {
+            Debug.LogError("PlayerController: No hay un Animator en el Player");
+        }
     }
 
     void Update()
     {
+        // Input clásico
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
+
+        // Animaciones 
+        if (animator != null)
+        {
+            animator.SetFloat("Horizontal", input.x);
+            animator.SetFloat("Vertical", input.y);
+            animator.SetBool("isMoving", input.sqrMagnitude > 0);
+        }
+
+        // Lógica original del segundo script
         HandleRaycast();
         HandleClueCombination();
 
-        if (interactAction != null && interactAction.WasPressedThisFrame())
+        if (Input.GetKeyDown(KeyCode.E))  // Cambiado a E para Interact (Input.GetKeyDown en lugar de InputSystem)
             TryInteract();
+    }
 
-        moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y);
-
-        if (movement != Vector3.zero)
-            transform.forward = movement;
-
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+    void FixedUpdate()
+    {
+        // Movimiento con Rigidbody del primer script
+        Vector3 movement = new Vector3(input.x, 0f, input.y);
+        rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
     }
 
     void HandleRaycast()
@@ -91,7 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             InventoryManager.Instance.inventory.RemoveItem(clueItem, 2);
             InventoryManager.Instance.inventory.AddItem(keyItem, 1);
-            UI_Message.Instance?.Show("¡Pistas combinadas! nueva llave obtenida");
+            UI_Message.Instance?.Show("¡Pistas combinadas! Nueva llave obtenida.");
         }
     }
 }

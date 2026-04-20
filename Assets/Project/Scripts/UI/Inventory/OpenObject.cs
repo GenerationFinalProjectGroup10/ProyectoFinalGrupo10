@@ -25,6 +25,6 @@ public class OpenObject : MonoBehaviour, IInteractable
         opened = true;
 
         UI_Message.Instance?.Show("Recogiste " + itemInside.itemName);
-         if (objectCollider != null) objectCollider.enabled = false; //Desactiva collider
+        gameObject.SetActive(false); //Desactiva el objeto para simular que se ha recogido
     }
 }
