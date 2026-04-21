@@ -672,7 +672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 118, y: 11}
+  m_AnchoredPosition: {x: 109, y: 11}
   m_SizeDelta: {x: -336.26004, y: -104.880035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790816191
@@ -697,15 +697,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: SETTINGS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8ccaec4d4f7fe6f4cae961f952db40e7, type: 2}
-  m_sharedMaterial: {fileID: -2642842051261175926, guid: 8ccaec4d4f7fe6f4cae961f952db40e7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
+  m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479924
-  m_fontColor: {r: 0.95686275, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.5
+  m_fontSize: 58.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -25.458923, y: 0, z: -22.411919, w: -13.617371}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1021,7 +1021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 142, y: -6}
+  m_AnchoredPosition: {x: 123, y: -16}
   m_SizeDelta: {x: -336.26004, y: -104.880035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1386473373
@@ -1046,15 +1046,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8ccaec4d4f7fe6f4cae961f952db40e7, type: 2}
-  m_sharedMaterial: {fileID: -2642842051261175926, guid: 8ccaec4d4f7fe6f4cae961f952db40e7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
+  m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479924
-  m_fontColor: {r: 0.95686275, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.85
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -29.883537, y: -18.114803, z: -35.508293, w: -9.779415}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1661,15 +1661,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8ccaec4d4f7fe6f4cae961f952db40e7, type: 2}
-  m_sharedMaterial: {fileID: -2642842051261175926, guid: 8ccaec4d4f7fe6f4cae961f952db40e7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
+  m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479924
-  m_fontColor: {r: 0.95686275, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -14.689682, y: -10.570805, z: -4.592514, w: -8.977787}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
