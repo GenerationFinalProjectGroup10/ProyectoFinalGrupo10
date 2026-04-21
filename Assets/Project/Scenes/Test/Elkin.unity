@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 6e714a592e057c745be1373a30c5b1d2, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 6e714a592e057c745be1373a30c5b1d2, type: 3}
       propertyPath: m_Name
       value: "Pared_Sala_habitaci\xF3n"
@@ -236,7 +236,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 1446ef32f7da244438bdc6ec4da27854, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 1446ef32f7da244438bdc6ec4da27854, type: 3}
       propertyPath: m_Name
       value: "Paredese_Cocina_Ba\xF1o"
@@ -724,7 +724,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 6290ba91891cdd3409845bc6fa70ef54, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 6290ba91891cdd3409845bc6fa70ef54, type: 3}
       propertyPath: m_Name
       value: Paredes_Verticales_Sala_Entrada
@@ -904,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2b0b1a94f02357429e5e5244c05fd46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.81
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a2b0b1a94f02357429e5e5244c05fd46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -941,7 +941,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: a2b0b1a94f02357429e5e5244c05fd46, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: a2b0b1a94f02357429e5e5244c05fd46, type: 3}
       propertyPath: m_Name
       value: Techo
@@ -1006,7 +1006,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 307e5c61b1c2f1b49b5360e07b52f64a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 307e5c61b1c2f1b49b5360e07b52f64a, type: 3}
       propertyPath: m_Name
       value: "Pared_Ba\xF1o_Habitaci\xF3n"
@@ -1072,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: ccb96c59485870141be7efa01f451f7b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: ccb96c59485870141be7efa01f451f7b, type: 3}
       propertyPath: m_Name
       value: Paredes_Habitaciones_Corredor
@@ -1138,7 +1138,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: a87c1fa2d8c5a4f4cb4ee248094b49f1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: a87c1fa2d8c5a4f4cb4ee248094b49f1, type: 3}
       propertyPath: m_Name
       value: Piso
@@ -1222,7 +1222,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 6568d7a87627ab549ba093b16fa4582f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 6568d7a87627ab549ba093b16fa4582f, type: 3}
       propertyPath: m_Name
       value: Paredes_Externas_Entrada
@@ -1288,7 +1288,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 1e9b421dcad078747963a2bbdfd522f3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 1e9b421dcad078747963a2bbdfd522f3, type: 3}
       propertyPath: m_Name
       value: "Paredes_Ba\xF1o_Corredor"
@@ -1354,7 +1354,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 340093fddde7c6b4cbb9436e5f975ef5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 340093fddde7c6b4cbb9436e5f975ef5, type: 3}
       propertyPath: m_Name
       value: Pared_letras_Sala_Corredor
@@ -1420,7 +1420,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 37e6e3abe76374a4b8953eca3ab33196, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 37e6e3abe76374a4b8953eca3ab33196, type: 3}
       propertyPath: m_Name
       value: Paredes_intermedias_Sala_Cocina
@@ -1486,7 +1486,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 72cb399ba959ef94980e56c285a328a3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 72cb399ba959ef94980e56c285a328a3, type: 3}
       propertyPath: m_Name
       value: Paredes_Cocina_corredor
@@ -1552,7 +1552,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 53af67201dd3d4749817a8eeaa1a913e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 53af67201dd3d4749817a8eeaa1a913e, type: 3}
       propertyPath: m_Name
       value: Paredes_Externas_Superiores
@@ -1618,7 +1618,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: 363c8ed2f10f4db4a8797cb10872e481, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: 363c8ed2f10f4db4a8797cb10872e481, type: 3}
       propertyPath: m_Name
       value: Paredes_Externas_Izquierda
@@ -1684,7 +1684,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: af7dbf968e49c07428dce09143c9fee7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: af7dbf968e49c07428dce09143c9fee7, type: 3}
       propertyPath: m_Name
       value: Paredes_Externas_Derecha
@@ -1750,7 +1750,7 @@ PrefabInstance:
     - target: {fileID: -7635826562936255635, guid: e162dc53b8cb3b645b0e081cb77ea26a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 69223f2240d39bd42b6a93486891d230, type: 2}
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: e162dc53b8cb3b645b0e081cb77ea26a, type: 3}
       propertyPath: m_Name
       value: "Paredes_Habitaci\xF3n_Habitaci\xF3n"
