@@ -40,13 +40,18 @@ public class PlayerController : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        // Animaciones 
+        // ---Animaciones con permanencia de posición---
         if (animator != null)
         {
-            animator.SetFloat("Horizontal", input.x);
-            animator.SetFloat("Vertical", input.y);
+        
+            if (input.sqrMagnitude > 0)
+            {
+                animator.SetFloat("Horizontal", input.x);
+                animator.SetFloat("Vertical", input.y);
+            }
             animator.SetBool("isMoving", input.sqrMagnitude > 0);
         }
+        // ------------------------------------------
 
         // Lógica original del segundo script
         HandleRaycast();
