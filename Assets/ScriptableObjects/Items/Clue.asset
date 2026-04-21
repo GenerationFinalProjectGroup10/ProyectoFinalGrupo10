@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Clue
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: Pista
-  icon: {fileID: 632082900, guid: 6c59c9b7fff151b48bc7a728820d8316, type: 3}
+  icon: {fileID: -1992041374, guid: cc2838000c8343641b1dd95ee30638db, type: 3}
   type: 1

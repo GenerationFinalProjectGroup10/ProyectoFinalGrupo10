@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c8da1bfce814864fb14013e56239cc7
+guid: cc2838000c8343641b1dd95ee30638db
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -21,7 +21,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: key_0
+      name: Clock 2D_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 73
-        width: 171
-        height: 79
+        x: 330
+        y: 44
+        width: 869
+        height: 914
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,8 +138,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0482748cf4e7d6742b4cddff0c53b9eb
-      internalID: 804701309
+      spriteID: 921584fcbe63cfc4d8d4fa54d08eff8e
+      internalID: -1992041374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clock 2D_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 623
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8036ac779541d9e418620fbac10db26c
+      internalID: -1040084912
       vertices: []
       indices: 
       edges: []
@@ -148,7 +170,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8948b221df337f941aa305f8bcfbf8ed
+    spriteID: 21ffabdfecd77414cb9ef6639b0b5399
     internalID: 0
     vertices: []
     indices: 
@@ -160,7 +182,8 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      key_0: 804701309
+      Clock 2D_0: -1992041374
+      Clock 2D_1: -1040084912
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
