@@ -154,10 +154,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2143129012443121745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384522081af0ccd4896c6786444c86c4, type: 3}
+  m_Script: {fileID: 11500000, guid: c58a3c901fda91543b4dea67df397fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 5
+  speed: 10
+  rayOrigin: {fileID: 0}
+  rayDistance: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  clueItem: {fileID: 0}
+  keyItem: {fileID: 0}
 --- !u!135 &2399086892146832914
 SphereCollider:
   m_ObjectHideFlags: 0

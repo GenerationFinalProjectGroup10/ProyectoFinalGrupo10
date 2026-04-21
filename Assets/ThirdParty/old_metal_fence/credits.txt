@@ -1,0 +1,23 @@
+This document is for informational purposes only.
+If redistributing this archive, please include this file so that others may benefit from 
+the information included herein.
+
+All included files are, or have previously been, released into the public domain - CC0
+No credit is required.
+
+Included are the obj exports of each piece.
+
+The models were derived from:
+https://opengameart.org/content/medieval-fence - cc0 - AnyRPG
+https://opengameart.org/content/fence-variation - cc0 - Scribe
+
+The textures were derived from:
+https://3dtextures.me/2018/11/26/metal-rusted-006-2/
+
+Preview images:
+Blender 2.83.5
+
+
+
+
+
