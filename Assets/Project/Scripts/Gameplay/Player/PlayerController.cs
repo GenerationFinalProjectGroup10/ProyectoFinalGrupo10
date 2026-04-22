@@ -26,12 +26,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ItemSO keyItem;
 
     [Header("Message Durations")]
-    [SerializeField] private float interactMessageDuration = 2f;
     [SerializeField] private float frameRewardMessageDuration = 4f;
     [SerializeField] private float clockRewardMessageDuration = 4f;
+    [SerializeField] private float combineHintMessageDuration = 2f;
 
     private bool frameRewardGiven;
     private bool clockRewardGiven;
+    private bool canCombineFrame;
+    private bool canCombineClock;
 
     void Start()
     {
@@ -68,11 +70,13 @@ public class PlayerController : MonoBehaviour
         }
 
         HandleRaycast();
+        HandleCombinationHints();
 
         if (Input.GetKeyDown(KeyCode.E))
             TryInteract();
 
-        HandleRewards();
+        if (Input.GetKeyDown(KeyCode.C))
+            TryCombine();
     }
 
     void FixedUpdate()
@@ -102,7 +106,7 @@ public class PlayerController : MonoBehaviour
                     string message = interactable.GetInteractMessage();
 
                     if (!string.IsNullOrWhiteSpace(message))
-                        UI_Message.Instance?.Show(message, true);
+                        UI_Message.Instance?.ShowInteraction(message);
                 }
 
                 lastHit = hit;
@@ -112,6 +116,36 @@ public class PlayerController : MonoBehaviour
 
         currentInteractable = null;
         lastHit = default;
+        UI_Message.Instance?.HideInteraction();
+    }
+
+    void HandleCombinationHints()
+    {
+        if (InventoryManager.Instance == null) return;
+
+        var inventory = InventoryManager.Instance.inventory;
+
+        bool hasAllFrameParts =
+            framePart1 != null && framePart2 != null && framePart3 != null && framePart4 != null && clockPart1 != null &&
+            inventory.HasItem(framePart1, 1) &&
+            inventory.HasItem(framePart2, 1) &&
+            inventory.HasItem(framePart3, 1) &&
+            inventory.HasItem(framePart4, 1);
+
+        canCombineFrame = !frameRewardGiven && hasAllFrameParts;
+
+        bool hasClockParts =
+            clockPart1 != null && clockPart2 != null && keyItem != null &&
+            inventory.HasItem(clockPart1, 1) &&
+            inventory.HasItem(clockPart2, 1);
+
+        canCombineClock = !clockRewardGiven && hasClockParts;
+
+        if (canCombineFrame)
+            UI_Message.Instance?.ShowInteraction("Presiona C para juntar las piezas del retrato");
+
+        else if (canCombineClock)
+            UI_Message.Instance?.ShowInteraction("Presiona C para colocar la manecilla en el reloj");
     }
 
     void TryInteract()
@@ -122,52 +156,44 @@ public class PlayerController : MonoBehaviour
             interactable.Interact(this);
     }
 
-    void HandleRewards()
+    void TryCombine()
     {
         if (InventoryManager.Instance == null) return;
 
         var inventory = InventoryManager.Instance.inventory;
 
-        if (!frameRewardGiven &&
-            framePart1 != null && framePart2 != null && framePart3 != null && framePart4 != null && clockPart1 != null)
+        if (canCombineFrame)
         {
-            bool hasAllFrameParts =
-                inventory.HasItem(framePart1, 1) &&
-                inventory.HasItem(framePart2, 1) &&
-                inventory.HasItem(framePart3, 1) &&
-                inventory.HasItem(framePart4, 1);
+            inventory.RemoveItem(framePart1, 1);
+            inventory.RemoveItem(framePart2, 1);
+            inventory.RemoveItem(framePart3, 1);
+            inventory.RemoveItem(framePart4, 1);
 
-            if (hasAllFrameParts)
-            {
-                inventory.RemoveItem(framePart1, 1);
-                inventory.RemoveItem(framePart2, 1);
-                inventory.RemoveItem(framePart3, 1);
-                inventory.RemoveItem(framePart4, 1);
+            inventory.AddItem(clockPart1, 1);
+            frameRewardGiven = true;
+            canCombineFrame = false;
 
-                inventory.AddItem(clockPart1, 1);
-                frameRewardGiven = true;
+            UI_Message.Instance?.ShowTemporary(
+                "¡Completaste el portaretrato! Obtienes la manecilla del reloj.",
+                frameRewardMessageDuration
+            );
 
-                UI_Message.Instance?.Show("¡Completaste el portaretrato! Obtienes la primera pieza del reloj.", false, frameRewardMessageDuration);
-            }
+            return;
         }
 
-        if (!clockRewardGiven &&
-            clockPart1 != null && clockPart2 != null && keyItem != null)
+        if (canCombineClock)
         {
-            bool hasClockParts =
-                inventory.HasItem(clockPart1, 1) &&
-                inventory.HasItem(clockPart2, 1);
+            inventory.RemoveItem(clockPart1, 1);
+            inventory.RemoveItem(clockPart2, 1);
 
-            if (hasClockParts)
-            {
-                inventory.RemoveItem(clockPart1, 1);
-                inventory.RemoveItem(clockPart2, 1);
+            inventory.AddItem(keyItem, 1);
+            clockRewardGiven = true;
+            canCombineClock = false;
 
-                inventory.AddItem(keyItem, 1);
-                clockRewardGiven = true;
-
-                UI_Message.Instance?.Show("¡Uniste las dos piezas del reloj y obtuviste la llave.", false, clockRewardMessageDuration);
-            }
+            UI_Message.Instance?.ShowTemporary(
+                "¡Uniste las dos piezas del reloj y obtuviste la llave.",
+                clockRewardMessageDuration
+            );
         }
     }
 }

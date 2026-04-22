@@ -7,7 +7,12 @@ public class OpenObject : MonoBehaviour, IInteractable
 
     [Header("Messages")]
     [SerializeField] private string interactMessage = "Presiona E para recoger";
+    [SerializeField] private string combineMessage = "Presiona C para juntar las piezas del reloj";
     [SerializeField] private float pickupMessageDuration = 3f;
+
+    [Header("Special Flags")]
+    [SerializeField] private bool isSecondClockPiece;
+    [SerializeField] private ItemSO requiredClockPart;
 
     private bool opened;
     private Collider objectCollider;
@@ -21,12 +26,30 @@ public class OpenObject : MonoBehaviour, IInteractable
 
     public string GetInteractMessage()
     {
-        return opened ? "" : interactMessage;
+        if (opened || itemInside == null) return "";
+
+        if (isSecondClockPiece &&
+            requiredClockPart != null &&
+            InventoryManager.Instance != null &&
+            InventoryManager.Instance.inventory.HasItem(requiredClockPart, 1))
+        {
+            return combineMessage;
+        }
+
+        return interactMessage;
     }
 
     public void Interact(PlayerController player)
     {
         if (opened || itemInside == null || InventoryManager.Instance == null) return;
+
+        if (isSecondClockPiece &&
+            requiredClockPart != null &&
+            InventoryManager.Instance.inventory.HasItem(requiredClockPart, 1))
+        {
+            UI_Message.Instance?.ShowTemporary("Presiona C para juntar las piezas del reloj", 2f);
+            return;
+        }
 
         InventoryManager.Instance.inventory.AddItem(itemInside, amount);
         opened = true;
@@ -35,7 +58,7 @@ public class OpenObject : MonoBehaviour, IInteractable
             ? "Recogiste " + itemInside.itemName
             : itemInside.pickupMessage;
 
-        UI_Message.Instance?.Show(msg, false, pickupMessageDuration);
+        UI_Message.Instance?.ShowTemporary(msg, pickupMessageDuration);
 
         if (objectCollider != null) objectCollider.enabled = false;
         if (objectRenderer != null) objectRenderer.enabled = false;

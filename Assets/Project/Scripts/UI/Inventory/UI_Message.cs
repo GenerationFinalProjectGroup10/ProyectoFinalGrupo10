@@ -11,11 +11,15 @@ public class UI_Message : MonoBehaviour
     [SerializeField] private RectTransform messagePanel;
     [SerializeField] private TextMeshProUGUI messageText;
 
-    [Header("Settings")]
-    [SerializeField] private float defaultDisplayDuration = 2f;
+    [Header("Durations")]
+    [SerializeField] private float defaultTemporaryDuration = 2f;
+
+    [Header("Layout")]
     [SerializeField] private Vector2 padding = new Vector2(30f, 18f);
 
-    private Coroutine hideCoroutine;
+    private Coroutine temporaryCoroutine;
+    private bool interactionMessageActive;
+    private string interactionMessage;
 
     private void Awake()
     {
@@ -42,58 +46,82 @@ public class UI_Message : MonoBehaviour
         messagePanel.gameObject.SetActive(false);
     }
 
-    public void Show(string message)
-    {
-        Show(message, false, defaultDisplayDuration);
-    }
-
-    public void Show(string message, bool persistent)
-    {
-        Show(message, persistent, defaultDisplayDuration);
-    }
-
-    public void Show(string message, bool persistent, float duration)
+    public void ShowInteraction(string message)
     {
         if (messagePanel == null || messageText == null) return;
 
-        if (hideCoroutine != null)
+        interactionMessageActive = true;
+        interactionMessage = message;
+
+        if (temporaryCoroutine != null)
         {
-            StopCoroutine(hideCoroutine);
-            hideCoroutine = null;
+            StopCoroutine(temporaryCoroutine);
+            temporaryCoroutine = null;
         }
 
         messageText.text = message;
         messagePanel.gameObject.SetActive(true);
+        ResizePanel(message);
+    }
 
+    public void HideInteraction()
+    {
+        interactionMessageActive = false;
+        interactionMessage = "";
+
+        if (temporaryCoroutine == null)
+        {
+            if (messagePanel != null)
+                messagePanel.gameObject.SetActive(false);
+        }
+    }
+
+    public void ShowTemporary(string message)
+    {
+        ShowTemporary(message, defaultTemporaryDuration);
+    }
+
+    public void ShowTemporary(string message, float duration)
+    {
+        if (messagePanel == null || messageText == null) return;
+
+        if (temporaryCoroutine != null)
+        {
+            StopCoroutine(temporaryCoroutine);
+            temporaryCoroutine = null;
+        }
+
+        messageText.text = message;
+        messagePanel.gameObject.SetActive(true);
+        ResizePanel(message);
+
+        temporaryCoroutine = StartCoroutine(HideTemporaryAfterDelay(duration));
+    }
+
+    private void ResizePanel(string message)
+    {
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(messagePanel);
 
         Vector2 textSize = messageText.GetPreferredValues(message);
         messagePanel.sizeDelta = textSize + padding;
-
-        if (!persistent)
-            hideCoroutine = StartCoroutine(HideAfterDelay(duration));
     }
 
-    public void Hide()
-    {
-        if (hideCoroutine != null)
-        {
-            StopCoroutine(hideCoroutine);
-            hideCoroutine = null;
-        }
-
-        if (messagePanel != null)
-            messagePanel.gameObject.SetActive(false);
-    }
-
-    private IEnumerator HideAfterDelay(float duration)
+    private IEnumerator HideTemporaryAfterDelay(float duration)
     {
         yield return new WaitForSeconds(duration);
 
-        if (messagePanel != null)
-            messagePanel.gameObject.SetActive(false);
+        temporaryCoroutine = null;
 
-        hideCoroutine = null;
+        if (interactionMessageActive)
+        {
+            messageText.text = interactionMessage;
+            messagePanel.gameObject.SetActive(true);
+            ResizePanel(interactionMessage);
+        }
+        else if (messagePanel != null)
+        {
+            messagePanel.gameObject.SetActive(false);
+        }
     }
 }
