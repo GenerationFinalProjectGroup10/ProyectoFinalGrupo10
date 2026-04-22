@@ -13,9 +13,25 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     private RaycastHit lastHit;
+    private Vector3 lookDirection = Vector3.forward;
+    private IInteractable currentInteractable;
 
-    [SerializeField] private ItemSO clueItem;
+    [Header("Rewards")]
+    [SerializeField] private ItemSO framePart1;
+    [SerializeField] private ItemSO framePart2;
+    [SerializeField] private ItemSO framePart3;
+    [SerializeField] private ItemSO framePart4;
+    [SerializeField] private ItemSO clockPart1;
+    [SerializeField] private ItemSO clockPart2;
     [SerializeField] private ItemSO keyItem;
+
+    [Header("Message Durations")]
+    [SerializeField] private float interactMessageDuration = 2f;
+    [SerializeField] private float frameRewardMessageDuration = 4f;
+    [SerializeField] private float clockRewardMessageDuration = 4f;
+
+    private bool frameRewardGiven;
+    private bool clockRewardGiven;
 
     void Start()
     {
@@ -36,34 +52,33 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Input clásico
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        // ---Animaciones con permanencia de posición---
+        Vector3 movement = new Vector3(input.x, 0f, input.y);
+
+        if (movement != Vector3.zero)
+            lookDirection = movement.normalized;
+
         if (animator != null)
         {
-        
-            if (input.sqrMagnitude > 0)
-            {
-                animator.SetFloat("Horizontal", input.x);
-                animator.SetFloat("Vertical", input.y);
-            }
+            animator.SetFloat("Horizontal", input.x);
+            animator.SetFloat("Vertical", input.y);
             animator.SetBool("isMoving", input.sqrMagnitude > 0);
         }
-        // ------------------------------------------
 
-        // Lógica original del segundo script
         HandleRaycast();
-        HandleClueCombination();
 
-        if (Input.GetKeyDown(KeyCode.E))  // Cambiado a E para Interact (Input.GetKeyDown en lugar de InputSystem)
+        if (Input.GetKeyDown(KeyCode.E))
             TryInteract();
+
+        HandleRewards();
     }
 
     void FixedUpdate()
     {
-        // Movimiento con Rigidbody del primer script
+        if (rb == null) return;
+
         Vector3 movement = new Vector3(input.x, 0f, input.y);
         rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
     }
@@ -73,20 +88,30 @@ public class PlayerController : MonoBehaviour
         if (rayOrigin == null || InventoryManager.Instance == null)
             return;
 
-        Debug.DrawRay(rayOrigin.position, rayOrigin.forward * rayDistance, Color.red);
+        Debug.DrawRay(rayOrigin.position, lookDirection * rayDistance, Color.red);
 
-        if (Physics.Raycast(rayOrigin.position, rayOrigin.forward, out RaycastHit hit, rayDistance, interactableLayer))
+        if (Physics.Raycast(rayOrigin.position, lookDirection, out RaycastHit hit, rayDistance, interactableLayer))
         {
-            if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+
+            if (interactable != null)
             {
-                UI_Message.Instance?.Show(interactable.GetInteractMessage(), persistent: true);
+                if (currentInteractable != interactable)
+                {
+                    currentInteractable = interactable;
+                    string message = interactable.GetInteractMessage();
+
+                    if (!string.IsNullOrWhiteSpace(message))
+                        UI_Message.Instance?.Show(message, true);
+                }
+
                 lastHit = hit;
                 return;
             }
         }
 
+        currentInteractable = null;
         lastHit = default;
-        UI_Message.Instance?.Hide();
     }
 
     void TryInteract()
@@ -97,21 +122,52 @@ public class PlayerController : MonoBehaviour
             interactable.Interact(this);
     }
 
-    void HandleClueCombination()
+    void HandleRewards()
     {
-        if (InventoryManager.Instance == null || clueItem == null || keyItem == null)
-            return;
+        if (InventoryManager.Instance == null) return;
 
-        if (!InventoryManager.Instance.inventory.HasItem(clueItem, 2))
-            return;
+        var inventory = InventoryManager.Instance.inventory;
 
-        UI_Message.Instance?.Show("Presiona C para combinar pistas", persistent: true);
-
-        if (Input.GetKeyDown(KeyCode.C))
+        if (!frameRewardGiven &&
+            framePart1 != null && framePart2 != null && framePart3 != null && framePart4 != null && clockPart1 != null)
         {
-            InventoryManager.Instance.inventory.RemoveItem(clueItem, 2);
-            InventoryManager.Instance.inventory.AddItem(keyItem, 1);
-            UI_Message.Instance?.Show("¡Pistas combinadas! Nueva llave obtenida.");
+            bool hasAllFrameParts =
+                inventory.HasItem(framePart1, 1) &&
+                inventory.HasItem(framePart2, 1) &&
+                inventory.HasItem(framePart3, 1) &&
+                inventory.HasItem(framePart4, 1);
+
+            if (hasAllFrameParts)
+            {
+                inventory.RemoveItem(framePart1, 1);
+                inventory.RemoveItem(framePart2, 1);
+                inventory.RemoveItem(framePart3, 1);
+                inventory.RemoveItem(framePart4, 1);
+
+                inventory.AddItem(clockPart1, 1);
+                frameRewardGiven = true;
+
+                UI_Message.Instance?.Show("¡Completaste el portaretrato! Obtienes la primera pieza del reloj.", false, frameRewardMessageDuration);
+            }
+        }
+
+        if (!clockRewardGiven &&
+            clockPart1 != null && clockPart2 != null && keyItem != null)
+        {
+            bool hasClockParts =
+                inventory.HasItem(clockPart1, 1) &&
+                inventory.HasItem(clockPart2, 1);
+
+            if (hasClockParts)
+            {
+                inventory.RemoveItem(clockPart1, 1);
+                inventory.RemoveItem(clockPart2, 1);
+
+                inventory.AddItem(keyItem, 1);
+                clockRewardGiven = true;
+
+                UI_Message.Instance?.Show("¡Uniste las dos piezas del reloj y obtuviste la llave.", false, clockRewardMessageDuration);
+            }
         }
     }
 }

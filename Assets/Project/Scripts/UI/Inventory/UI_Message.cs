@@ -1,17 +1,21 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UI_Message : MonoBehaviour
 {
     public static UI_Message Instance;
 
-    [SerializeField] private GameObject messagePanel;
+    [Header("UI References")]
+    [SerializeField] private RectTransform messagePanel;
     [SerializeField] private TextMeshProUGUI messageText;
-    [SerializeField] private float displayDuration = 2f;
+
+    [Header("Settings")]
+    [SerializeField] private float defaultDisplayDuration = 2f;
+    [SerializeField] private Vector2 padding = new Vector2(30f, 18f);
 
     private Coroutine hideCoroutine;
-    private bool isShowingTempMessage = false;
 
     private void Awake()
     {
@@ -35,40 +39,61 @@ public class UI_Message : MonoBehaviour
             return;
         }
 
-        messagePanel.SetActive(false);
+        messagePanel.gameObject.SetActive(false);
     }
 
-    public void Show(string message, bool persistent = false)
+    public void Show(string message)
     {
-        if (isShowingTempMessage && persistent) return;
+        Show(message, false, defaultDisplayDuration);
+    }
 
-        messageText.text = message;
-        messagePanel.SetActive(true);
+    public void Show(string message, bool persistent)
+    {
+        Show(message, persistent, defaultDisplayDuration);
+    }
+
+    public void Show(string message, bool persistent, float duration)
+    {
+        if (messagePanel == null || messageText == null) return;
 
         if (hideCoroutine != null)
+        {
             StopCoroutine(hideCoroutine);
+            hideCoroutine = null;
+        }
+
+        messageText.text = message;
+        messagePanel.gameObject.SetActive(true);
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(messagePanel);
+
+        Vector2 textSize = messageText.GetPreferredValues(message);
+        messagePanel.sizeDelta = textSize + padding;
 
         if (!persistent)
-        {
-            isShowingTempMessage = true;
-            hideCoroutine = StartCoroutine(HideAfterDelay());
-        }
+            hideCoroutine = StartCoroutine(HideAfterDelay(duration));
     }
 
     public void Hide()
     {
-        if (isShowingTempMessage) return;
-
         if (hideCoroutine != null)
+        {
             StopCoroutine(hideCoroutine);
+            hideCoroutine = null;
+        }
 
-        messagePanel.SetActive(false);
+        if (messagePanel != null)
+            messagePanel.gameObject.SetActive(false);
     }
 
-    private IEnumerator HideAfterDelay()
+    private IEnumerator HideAfterDelay(float duration)
     {
-        yield return new WaitForSeconds(displayDuration);
-        messagePanel.SetActive(false);
-        isShowingTempMessage = false;
+        yield return new WaitForSeconds(duration);
+
+        if (messagePanel != null)
+            messagePanel.gameObject.SetActive(false);
+
+        hideCoroutine = null;
     }
 }

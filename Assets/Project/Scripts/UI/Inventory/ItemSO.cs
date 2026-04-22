@@ -6,12 +6,13 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public Sprite icon;
     public ItemType type;
+    [TextArea] public string pickupMessage;
 }
 
 public enum ItemType
 {
     Key,
-    CluePart,
-    Tool,
+    FramePart,
+    ClockPart,
     Potion
 }

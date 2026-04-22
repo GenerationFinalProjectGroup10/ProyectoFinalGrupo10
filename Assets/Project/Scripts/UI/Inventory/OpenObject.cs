@@ -5,17 +5,24 @@ public class OpenObject : MonoBehaviour, IInteractable
     public ItemSO itemInside;
     public int amount = 1;
 
+    [Header("Messages")]
     [SerializeField] private string interactMessage = "Presiona E para recoger";
-    private bool opened;
+    [SerializeField] private float pickupMessageDuration = 3f;
 
+    private bool opened;
     private Collider objectCollider;
+    private Renderer objectRenderer;
 
     private void Awake()
     {
         objectCollider = GetComponent<Collider>();
+        objectRenderer = GetComponent<Renderer>();
     }
 
-    public string GetInteractMessage() => opened ? "" : interactMessage;
+    public string GetInteractMessage()
+    {
+        return opened ? "" : interactMessage;
+    }
 
     public void Interact(PlayerController player)
     {
@@ -24,7 +31,13 @@ public class OpenObject : MonoBehaviour, IInteractable
         InventoryManager.Instance.inventory.AddItem(itemInside, amount);
         opened = true;
 
-        UI_Message.Instance?.Show("Recogiste " + itemInside.itemName);
-        gameObject.SetActive(false); //Desactiva el objeto para simular que se ha recogido
+        string msg = string.IsNullOrWhiteSpace(itemInside.pickupMessage)
+            ? "Recogiste " + itemInside.itemName
+            : itemInside.pickupMessage;
+
+        UI_Message.Instance?.Show(msg, false, pickupMessageDuration);
+
+        if (objectCollider != null) objectCollider.enabled = false;
+        if (objectRenderer != null) objectRenderer.enabled = false;
     }
 }
