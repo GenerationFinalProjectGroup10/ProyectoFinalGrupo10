@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Key
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: Llave
-  icon: {fileID: 804701309, guid: 0c8da1bfce814864fb14013e56239cc7, type: 3}
+  icon: {fileID: -1082166619, guid: f5765dbac83d6d74aa468da7d2424ff0, type: 3}
   type: 0
