@@ -485,6 +485,7 @@ MonoBehaviour:
   keyItem: {fileID: 11400000, guid: 74c35f4fd567aff4c8865035d446c260, type: 2}
   frameRewardMessageDuration: 5
   clockRewardMessageDuration: 5
+  combineHintMessageDuration: 2
 --- !u!4 &125105151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6973366806221029094, guid: 05269491f6728e94f839045aca351817, type: 3}
@@ -2006,7 +2007,10 @@ MonoBehaviour:
   itemInside: {fileID: 11400000, guid: 911fc8ff5a35d7e43aaa837c4845fdab, type: 2}
   amount: 1
   interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar las piezas del reloj
   pickupMessageDuration: 2
+  isSecondClockPiece: 0
+  requiredClockPart: {fileID: 0}
 --- !u!65 &856282024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2241,7 +2245,10 @@ MonoBehaviour:
   itemInside: {fileID: 11400000, guid: e7b46bdad1e83bf488264f4591bfa11c, type: 2}
   amount: 1
   interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar las piezas del reloj
   pickupMessageDuration: 3
+  isSecondClockPiece: 0
+  requiredClockPart: {fileID: 0}
 --- !u!65 &1016617530
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3314,7 +3321,10 @@ MonoBehaviour:
   itemInside: {fileID: 11400000, guid: a00c6d17d19d5734297628e4e5726b5c, type: 2}
   amount: 1
   interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar las piezas del reloj
   pickupMessageDuration: 3
+  isSecondClockPiece: 0
+  requiredClockPart: {fileID: 0}
 --- !u!65 &1429027433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3406,7 +3416,10 @@ MonoBehaviour:
   itemInside: {fileID: 11400000, guid: 5ace081c0a573604f855c98ffaf30747, type: 2}
   amount: 1
   interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar las piezas del reloj
   pickupMessageDuration: 3
+  isSecondClockPiece: 0
+  requiredClockPart: {fileID: 0}
 --- !u!1 &1473647201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5094,7 +5107,10 @@ MonoBehaviour:
   itemInside: {fileID: 11400000, guid: 8b9928ce286e6774781281377119a762, type: 2}
   amount: 1
   interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar las piezas del reloj
   pickupMessageDuration: 3
+  isSecondClockPiece: 0
+  requiredClockPart: {fileID: 0}
 --- !u!65 &1912974033
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5217,7 +5233,10 @@ MonoBehaviour:
   itemInside: {fileID: 11400000, guid: 43dd1d58651ccf745b6167e3046a03e2, type: 2}
   amount: 1
   interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar las piezas del reloj
   pickupMessageDuration: 3
+  isSecondClockPiece: 1
+  requiredClockPart: {fileID: 11400000, guid: a24d3c4d13bcb474d851b8bb3b8299fe, type: 2}
 --- !u!65 &1977685242
 BoxCollider:
   m_ObjectHideFlags: 0

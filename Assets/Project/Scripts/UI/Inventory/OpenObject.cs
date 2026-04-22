@@ -31,9 +31,15 @@ public class OpenObject : MonoBehaviour, IInteractable
         if (isSecondClockPiece &&
             requiredClockPart != null &&
             InventoryManager.Instance != null &&
+            InventoryManager.Instance.inventory != null &&
             InventoryManager.Instance.inventory.HasItem(requiredClockPart, 1))
         {
             return combineMessage;
+        }
+
+        if (isSecondClockPiece)
+        {
+            return "";
         }
 
         return interactMessage;
@@ -47,7 +53,6 @@ public class OpenObject : MonoBehaviour, IInteractable
             requiredClockPart != null &&
             InventoryManager.Instance.inventory.HasItem(requiredClockPart, 1))
         {
-            UI_Message.Instance?.ShowTemporary("Presiona C para juntar las piezas del reloj", 2f);
             return;
         }
 
