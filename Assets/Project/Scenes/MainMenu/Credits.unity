@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wilfredo Rivera
+  m_text: WILFREDO RIVERA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "David Pati\xF1o Pato"
+  m_text: "DAVID PATI\xD1O \"PATO\""
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver en Itch
+  m_text: ITCH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver en Itch
+  m_text: ITCH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VFX | UI | Developer
+  m_text: VFX | UI | DEVELOPER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back
+  m_text: BACK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver en Itch
+  m_text: ITCH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Animation | Audio | Developer
+  m_text: ANIMATION | AUDIO | DEVELOPER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -2185,7 +2185,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alexander Reina
+  m_text: ALEXANDER REINA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -2455,7 +2455,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ver en Itch
+  m_text: ITCH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -2725,7 +2725,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Product Manager | UI | Developer
+  m_text: PRODUCT MANAGER | UI | DEVELOPER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -2997,7 +2997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Elkin Estupi\xF1an"
+  m_text: "ELKIN ESTUPI\xD1AN"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -3239,7 +3239,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Art | Animation | Developer
+  m_text: ART | ANIMATION | DEVELOPER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
