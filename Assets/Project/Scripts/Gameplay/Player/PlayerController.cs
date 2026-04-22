@@ -4,6 +4,13 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10f;
 
+    [Header("Camera Settings")]
+    public Transform cameraPivot;
+    public float mouseSensitivity = 3f;
+    public float rotationSmooth = 10f;
+    public float minPitch = -15f;
+    public float maxPitch = 35f;
+
     [Header("Raycast Settings")]
     public Transform rayOrigin;
     public float rayDistance = 3f;
@@ -17,55 +24,103 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ItemSO clueItem;
     [SerializeField] private ItemSO keyItem;
 
+    private float yaw;
+    private float pitch;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
+        yaw = transform.eulerAngles.y;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         if (rb == null)
         {
-            Debug.LogError("PlayerController: No hay un Rigidbody en el Player");
+            Debug.LogError("No Rigidbody en Player");
             return;
         }
 
         if (animator == null)
         {
-            Debug.LogError("PlayerController: No hay un Animator en el Player");
+            Debug.LogError("No Animator en Player");
         }
     }
 
     void Update()
     {
-        // Input clásico
+        // INPUT
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        // ---Animaciones con permanencia de posición---
+        // CAMARA + GIRO
+        HandleCameraRotation();
+
+        // ANIMACIONES (intactas)
         if (animator != null)
         {
-        
             if (input.sqrMagnitude > 0)
             {
                 animator.SetFloat("Horizontal", input.x);
                 animator.SetFloat("Vertical", input.y);
             }
+
             animator.SetBool("isMoving", input.sqrMagnitude > 0);
         }
-        // ------------------------------------------
 
-        // Lógica original del segundo script
+        // SISTEMAS
         HandleRaycast();
         HandleClueCombination();
 
-        if (Input.GetKeyDown(KeyCode.E))  // Cambiado a E para Interact (Input.GetKeyDown en lugar de InputSystem)
+        if (Input.GetKeyDown(KeyCode.E))
             TryInteract();
     }
 
     void FixedUpdate()
     {
-        // Movimiento con Rigidbody del primer script
-        Vector3 movement = new Vector3(input.x, 0f, input.y);
-        rb.MovePosition(rb.position + movement.normalized * speed * Time.fixedDeltaTime);
+        // Movimiento basado en yaw REAL del player
+        Quaternion moveRotation = Quaternion.Euler(0f, yaw, 0f);
+
+        Vector3 forward = moveRotation * Vector3.forward;
+        Vector3 right = moveRotation * Vector3.right;
+
+        Vector3 moveDir =
+            forward * input.y +
+            right * input.x;
+
+        if (moveDir.sqrMagnitude > 1f)
+            moveDir.Normalize();
+
+        rb.MovePosition(
+            rb.position +
+            moveDir * speed * Time.fixedDeltaTime
+        );
+    }
+
+    void HandleCameraRotation()
+    {
+        if (cameraPivot == null) return;
+
+        // Mouse
+        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
+        pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        // Limite vertical
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+
+        // Player rota 360 limpio
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        // Cámara solo pitch local
+        Quaternion targetPitch = Quaternion.Euler(pitch, 0f, 0f);
+
+        cameraPivot.localRotation = Quaternion.Lerp(
+            cameraPivot.localRotation,
+            targetPitch,
+            rotationSmooth * Time.deltaTime
+        );
     }
 
     void HandleRaycast()
