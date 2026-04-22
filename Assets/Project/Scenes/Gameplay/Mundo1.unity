@@ -2382,11 +2382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecfd316aae11b44eb3612e6ef9aae85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Temporizadorui
-  timerText: {fileID: 122584529}
-  showSeconds: 1
-  warningThresholdSeconds: 3600
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  warningColor: {r: 1, g: 0, b: 0, a: 1}
+  texto: {fileID: 0}
 --- !u!4 &222718664
 Transform:
   m_ObjectHideFlags: 0
@@ -4172,7 +4168,7 @@ Transform:
   m_GameObject: {fileID: 469678371}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
-  m_LocalPosition: {x: 72.56, y: -11.3, z: 26.91}
+  m_LocalPosition: {x: 72.98, y: -11.3, z: 26.91}
   m_LocalScale: {x: 163, y: 65.2, z: 80.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15671,7 +15667,7 @@ Transform:
   m_GameObject: {fileID: 1474390285}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: -0.70710677}
-  m_LocalPosition: {x: 116.89, y: -11.3, z: -4.86}
+  m_LocalPosition: {x: 117.44, y: -11.3, z: -4.86}
   m_LocalScale: {x: 163, y: 65.2, z: 80.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15949,7 +15945,7 @@ GameObject:
   - component: {fileID: 1502889299}
   - component: {fileID: 1502889298}
   - component: {fileID: 1502889297}
-  - component: {fileID: 1502889296}
+  - component: {fileID: 1502889301}
   m_Layer: 0
   m_Name: Puerta_Sotano
   m_TagString: Untagged
@@ -15957,18 +15953,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1502889296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502889295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0be549d3b87930d41a74e6810548f682, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BasementDoor
 --- !u!65 &1502889297
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16062,6 +16046,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1996947145}
   m_LocalEulerAnglesHint: {x: 0, y: -89.035, z: 0}
+--- !u!114 &1502889301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502889295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f95086eba1b2b942afedb6b7704489c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractuarCambioEscena
+  nombreEscena: 
+  tecla: 101
 --- !u!1001 &1507932958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16231,7 +16229,7 @@ Transform:
   m_GameObject: {fileID: 1544353577}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.156799, y: -0.35458, z: 14.330991}
+  m_LocalPosition: {x: -11.16, y: -0.35458, z: 14.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18042,50 +18040,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709860392}
   m_CullTransparentMesh: 1
---- !u!1 &1711214690
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1711214692}
-  - component: {fileID: 1711214691}
-  m_Layer: 0
-  m_Name: PuzzleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1711214691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711214690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0848ded87dd5e3a40b5930b05d0ca461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemCombiner
---- !u!4 &1711214692
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1711214690}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.06794, y: -0.36738998, z: 6.999091}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1996947145}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1711286361
 GameObject:
   m_ObjectHideFlags: 0
@@ -18836,11 +18790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc7ea06d56d2b74f8471dc47a0b0bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClockManager
-  useRealTime: 0
   gameTimeMultiplier: 200
   chimeAudioSource: {fileID: 1767806900}
   chimeClip: {fileID: 8300000, guid: d7426a22f0fe5d04d8a87f133b73dcfd, type: 3}
-  timeBetweenChimes: 1.2
 --- !u!4 &1767806902
 Transform:
   m_ObjectHideFlags: 0
@@ -19475,7 +19427,7 @@ Transform:
   m_GameObject: {fileID: 1835258583}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: -0.70710677}
-  m_LocalPosition: {x: 116.89, y: -11.3, z: -50.95}
+  m_LocalPosition: {x: 118.21, y: -11.3, z: -50.95}
   m_LocalScale: {x: 163, y: 65.2, z: 80.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20728,7 +20680,6 @@ Transform:
   - {fileID: 1314942577}
   - {fileID: 1793962377}
   - {fileID: 125105151}
-  - {fileID: 1711214692}
   - {fileID: 1502889300}
   - {fileID: 544193501}
   - {fileID: 1557134693}
@@ -20856,7 +20807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.60131836, y: 1}
+  m_AnchoredPosition: {x: 0.60131836, y: 0.9999695}
   m_SizeDelta: {x: 208.2, y: 76.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2008215381
