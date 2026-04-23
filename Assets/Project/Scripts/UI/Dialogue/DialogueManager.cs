@@ -31,14 +31,18 @@ public class DialogueManager : MonoBehaviour
     public SceneFader sceneFader;
     public string nextSceneName = "Mundo1";
 
+    [Header("Sequence Control")]
+    public bool usePauseSystem = false;
+
+    [Header("Fade Control")]
+    public bool pauseEndFade = false;
+
+    [HideInInspector] public bool waitingExternalResume = false;
+
     private int currentNode = 0;
     private Coroutine typingCoroutine;
-    private bool waitingForChoice = false;
 
-    private string currentFullText;
     private DialogueOption currentOption;
-
-    private bool isInResponse = false;
 
     void Start()
     {
@@ -51,7 +55,7 @@ public class DialogueManager : MonoBehaviour
         speakerIcon.enabled = false;
 
         if (dialogueCanvasGroup != null)
-            dialogueCanvasGroup.alpha = 0;
+            dialogueCanvasGroup.alpha = 0f;
 
         StartCoroutine(IntroSequence());
     }
@@ -60,14 +64,15 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayBeforeStart);
 
-        float time = 0;
+        float time = 0f;
 
         while (time < fadeDuration)
         {
             time += Time.deltaTime;
 
             if (dialogueCanvasGroup != null)
-                dialogueCanvasGroup.alpha = Mathf.Lerp(0, 1, time / fadeDuration);
+                dialogueCanvasGroup.alpha =
+                    Mathf.Lerp(0f, 1f, time / fadeDuration);
 
             yield return null;
         }
@@ -85,20 +90,24 @@ public class DialogueManager : MonoBehaviour
 
     void ShowNode()
     {
+        if (currentNode < 0 || currentNode >= nodes.Length)
+        {
+            EndDialogue();
+            return;
+        }
+
         DialogueNode node = nodes[currentNode];
 
-        isInResponse = false;
+        choicesPanel.SetActive(false);
 
-        dialogueText.text = "";
+        if (dialogueCanvasGroup != null)
+            dialogueCanvasGroup.alpha = 1f;
 
         nameText.text = node.characterName;
         nameText.color = node.nameColor;
 
         speakerIcon.sprite = node.characterIcon;
-        speakerIcon.enabled = true;
-
-        choicesPanel.SetActive(false);
-        waitingForChoice = false;
+        speakerIcon.enabled = node.characterIcon != null;
 
         if (node.voiceClip != null && audioSource != null)
         {
@@ -106,12 +115,11 @@ public class DialogueManager : MonoBehaviour
             audioSource.Play();
         }
 
-        currentFullText = node.dialogueText;
-
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        typingCoroutine = StartCoroutine(TypeText(currentFullText));
+        typingCoroutine =
+            StartCoroutine(TypeText(node.dialogueText));
     }
 
     IEnumerator TypeText(string text)
@@ -131,31 +139,42 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueNode node = nodes[currentNode];
 
-        if (node.options != null && node.options.Length > 0)
+        if (node.options == null || node.options.Length == 0)
         {
-            waitingForChoice = true;
-            choicesPanel.SetActive(true);
+            StartCoroutine(AutoNextNode());
+            return;
+        }
 
-            for (int i = 0; i < choiceButtons.Length; i++)
+        choicesPanel.SetActive(true);
+
+        for (int i = 0; i < choiceButtons.Length; i++)
+        {
+            if (i < node.options.Length)
             {
-                if (i < node.options.Length)
-                {
-                    choiceButtons[i].gameObject.SetActive(true);
+                choiceButtons[i].gameObject.SetActive(true);
 
-                    TMP_Text buttonText = choiceButtons[i].GetComponentInChildren<TMP_Text>();
-                    buttonText.text = node.options[i].optionText;
+                TMP_Text txt =
+                    choiceButtons[i].GetComponentInChildren<TMP_Text>();
 
-                    choiceButtons[i].onClick.RemoveAllListeners();
+                txt.text = node.options[i].optionText;
 
-                    int capturedIndex = i;
-                    choiceButtons[i].onClick.AddListener(() => SelectOption(capturedIndex));
-                }
-                else
-                {
-                    choiceButtons[i].gameObject.SetActive(false);
-                }
+                choiceButtons[i].onClick.RemoveAllListeners();
+
+                int id = i;
+                choiceButtons[i].onClick.AddListener(() =>
+                    SelectOption(id));
+            }
+            else
+            {
+                choiceButtons[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    IEnumerator AutoNextNode()
+    {
+        yield return new WaitForSeconds(1f);
+        NextNode();
     }
 
     void SelectOption(int optionIndex)
@@ -163,76 +182,21 @@ public class DialogueManager : MonoBehaviour
         DialogueNode node = nodes[currentNode];
         currentOption = node.options[optionIndex];
 
-        waitingForChoice = false;
-
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
         choicesPanel.SetActive(false);
 
-        isInResponse = true;
-
-        // 👶 niña habla
-        nameText.text = currentOption.responseCharacterName;
-        nameText.color = currentOption.responseNameColor;
-
-        speakerIcon.sprite = currentOption.responseCharacterIcon;
-        speakerIcon.enabled = true;
-
-        currentFullText = currentOption.optionText;
-
-        typingCoroutine = StartCoroutine(TypePlayerLine(currentFullText));
-    }
-
-    IEnumerator TypePlayerLine(string text)
-    {
-        dialogueText.text = "";
-
-        foreach (char letter in text)
-        {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        yield return new WaitForSeconds(1f);
-
-        ShowMotherResponse();
-    }
-
-    void ShowMotherResponse()
-    {
-        DialogueNode node = nodes[currentNode];
-
-        nameText.text = node.characterName;
-        nameText.color = node.nameColor;
-
-        speakerIcon.sprite = node.characterIcon;
-        speakerIcon.enabled = true;
-
-        if (node.voiceClip != null && audioSource != null)
-        {
-            audioSource.clip = node.voiceClip;
-            audioSource.Play();
-        }
-
-        currentFullText = currentOption.responseText;
-
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
-        typingCoroutine = StartCoroutine(TypeResponse(currentFullText));
+        typingCoroutine =
+            StartCoroutine(TypeOptionFlow());
     }
 
-    IEnumerator TypeResponse(string text)
+    IEnumerator TypeOptionFlow()
     {
-        dialogueText.text = "";
+        dialogueText.text = currentOption.optionText;
+        yield return new WaitForSeconds(1f);
 
-        foreach (char letter in text)
-        {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
+        dialogueText.text = currentOption.responseText;
         yield return new WaitForSeconds(1.5f);
 
         NextNode();
@@ -240,6 +204,44 @@ public class DialogueManager : MonoBehaviour
 
     void NextNode()
     {
+        if (usePauseSystem &&
+            (currentNode == 0 || currentNode == 1))
+        {
+            waitingExternalResume = true;
+
+            if (dialogueCanvasGroup != null)
+                dialogueCanvasGroup.alpha = 0f;
+
+            return;
+        }
+
+        currentNode++;
+
+        if (currentNode < nodes.Length)
+            ShowNode();
+        else
+            EndDialogue();
+    }
+
+    public void ContinueDialogue()
+    {
+        waitingExternalResume = false;
+
+        currentNode++;
+
+        if (currentNode < nodes.Length)
+            ShowNode();
+        else
+            EndDialogue();
+    }
+
+    public void ForceNextNode()
+    {
+        waitingExternalResume = false;
+
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
         currentNode++;
 
         if (currentNode < nodes.Length)
@@ -249,6 +251,21 @@ public class DialogueManager : MonoBehaviour
     }
 
     void EndDialogue()
+    {
+        if (pauseEndFade)
+        {
+            waitingExternalResume = true;
+
+            if (dialogueCanvasGroup != null)
+                dialogueCanvasGroup.alpha = 0f;
+
+            return;
+        }
+
+        DoFadeNow();
+    }
+
+    public void DoFadeNow()
     {
         if (sceneFader != null)
             sceneFader.FadeToScene(nextSceneName);
