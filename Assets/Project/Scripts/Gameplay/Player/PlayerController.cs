@@ -32,7 +32,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
-        yaw = transform.eulerAngles.y;
+        // 🔥 INICIAR MIRANDO AL FRENTE
+        yaw = 0f;
+        pitch = 0f;
+        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+        if (cameraPivot != null)
+            cameraPivot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -51,14 +57,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // INPUT
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        // CAMARA + GIRO
         HandleCameraRotation();
 
-        // ANIMACIONES (intactas)
         if (animator != null)
         {
             if (input.sqrMagnitude > 0)
@@ -70,7 +73,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isMoving", input.sqrMagnitude > 0);
         }
 
-        // SISTEMAS
         HandleRaycast();
         HandleClueCombination();
 
@@ -80,7 +82,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Movimiento basado en yaw REAL del player
         Quaternion moveRotation = Quaternion.Euler(0f, yaw, 0f);
 
         Vector3 forward = moveRotation * Vector3.forward;
@@ -103,17 +104,13 @@ public class PlayerController : MonoBehaviour
     {
         if (cameraPivot == null) return;
 
-        // Mouse
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // Limite vertical
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
-        // Player rota 360 limpio
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
 
-        // Cámara solo pitch local
         Quaternion targetPitch = Quaternion.Euler(pitch, 0f, 0f);
 
         cameraPivot.localRotation = Quaternion.Lerp(
