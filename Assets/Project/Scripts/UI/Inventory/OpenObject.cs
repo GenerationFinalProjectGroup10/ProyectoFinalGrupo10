@@ -7,12 +7,11 @@ public class OpenObject : MonoBehaviour, IInteractable
 
     [Header("Messages")]
     [SerializeField] private string interactMessage = "Presiona E para recoger";
-    [SerializeField] private string combineMessage = "Presiona C para juntar las piezas del reloj";
+    [SerializeField] private string combineMessage = "Presiona C para juntar la pieza del reloj";
     [SerializeField] private float pickupMessageDuration = 3f;
 
     [Header("Special Flags")]
     [SerializeField] private bool isSecondClockPiece;
-    [SerializeField] private ItemSO requiredClockPart;
 
     private bool opened;
     private Collider objectCollider;
@@ -24,23 +23,20 @@ public class OpenObject : MonoBehaviour, IInteractable
         objectRenderer = GetComponent<Renderer>();
     }
 
+    public bool IsSecondClockPiece()
+    {
+        return isSecondClockPiece;
+    }
+
     public string GetInteractMessage()
     {
-        if (opened || itemInside == null) return "";
-
-        if (isSecondClockPiece &&
-            requiredClockPart != null &&
-            InventoryManager.Instance != null &&
-            InventoryManager.Instance.inventory != null &&
-            InventoryManager.Instance.inventory.HasItem(requiredClockPart, 1))
-        {
-            return combineMessage;
-        }
+        if (opened) return "";
 
         if (isSecondClockPiece)
-        {
+            return combineMessage;
+
+        if (itemInside == null)
             return "";
-        }
 
         return interactMessage;
     }
@@ -49,12 +45,8 @@ public class OpenObject : MonoBehaviour, IInteractable
     {
         if (opened || itemInside == null || InventoryManager.Instance == null) return;
 
-        if (isSecondClockPiece &&
-            requiredClockPart != null &&
-            InventoryManager.Instance.inventory.HasItem(requiredClockPart, 1))
-        {
+        if (isSecondClockPiece)
             return;
-        }
 
         InventoryManager.Instance.inventory.AddItem(itemInside, amount);
         opened = true;
@@ -64,6 +56,14 @@ public class OpenObject : MonoBehaviour, IInteractable
             : itemInside.pickupMessage;
 
         UI_Message.Instance?.ShowTemporary(msg, pickupMessageDuration);
+
+        if (objectCollider != null) objectCollider.enabled = false;
+        if (objectRenderer != null) objectRenderer.enabled = false;
+    }
+
+    public void ConsumeWorldObject()
+    {
+        opened = true;
 
         if (objectCollider != null) objectCollider.enabled = false;
         if (objectRenderer != null) objectRenderer.enabled = false;
