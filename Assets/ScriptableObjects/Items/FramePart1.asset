@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 044dd1a965b567149925e42e5e4c0c89, type: 3}
-  m_Name: Key
+  m_Name: FramePart1
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: Llave
-  icon: {fileID: -1082166619, guid: f5765dbac83d6d74aa468da7d2424ff0, type: 3}
-  type: 0
-  pickupMessage: "\xA1Uniste las dos piezas del reloj y obtuviste la llave!"
+  itemName: Parte 1
+  icon: {fileID: -1187275469, guid: deab3f51dd5da9e4c9c8a88b1bcfc7f7, type: 3}
+  type: 1
+  pickupMessage: Has encontrado parte 1 del portaretrato

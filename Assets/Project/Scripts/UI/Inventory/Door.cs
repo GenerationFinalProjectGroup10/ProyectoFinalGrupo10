@@ -4,7 +4,8 @@ public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemSO requiredKey;
     private Collider doorCollider;
-    
+    private bool opened;
+
     private void Awake()
     {
         doorCollider = GetComponent<Collider>();
@@ -12,6 +13,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public string GetInteractMessage()
     {
+        if (opened) return "";
         if (InventoryManager.Instance == null || requiredKey == null) return "";
 
         bool hasKey = InventoryManager.Instance.inventory.HasItem(requiredKey, 1);
@@ -20,7 +22,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact(PlayerController player)
     {
-        if (InventoryManager.Instance == null || requiredKey == null) return;
+        if (opened || InventoryManager.Instance == null || requiredKey == null) return;
 
         bool hasKey = InventoryManager.Instance.inventory.HasItem(requiredKey, 1);
 
@@ -31,14 +33,15 @@ public class Door : MonoBehaviour, IInteractable
         }
         else
         {
-            UI_Message.Instance?.Show("Necesitas una llave");
+            UI_Message.Instance?.ShowTemporary("Necesitas una llave", 2f);
         }
     }
 
     private void OpenDoor()
     {
-        UI_Message.Instance?.Show("¡Puerta abierta!");
+        opened = true;
+        UI_Message.Instance?.ShowTemporary("¡Puerta abierta!", 2.5f);
 
-        if (doorCollider != null) doorCollider.enabled = false; //Desactiva collider
+        if (doorCollider != null) doorCollider.enabled = false;
     }
 }
