@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Llave
   icon: {fileID: -1082166619, guid: f5765dbac83d6d74aa468da7d2424ff0, type: 3}
   type: 0
+  pickupMessage: "\xA1Uniste las dos piezas del reloj y obtuviste la llave!"
