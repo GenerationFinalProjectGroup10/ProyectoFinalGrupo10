@@ -8238,7 +8238,7 @@ Transform:
   m_GameObject: {fileID: 846454848}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 88.77, y: -11.3, z: -108.15}
+  m_LocalPosition: {x: 88.42, y: -11.3, z: -108.15}
   m_LocalScale: {x: 163, y: 133.6, z: 80.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8505,7 +8505,7 @@ Transform:
   m_GameObject: {fileID: 877733321}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
-  m_LocalPosition: {x: -4.75, y: -11.3, z: 26.91}
+  m_LocalPosition: {x: -4.13, y: -11.3, z: 26.91}
   m_LocalScale: {x: 163, y: 134.1, z: 80.9}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14826,9 +14826,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c4f29d890a4a645bb4dc3e38b8471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UI_Message
-  messagePanel: {fileID: 1353189848}
-  messageText: {fileID: 804547684}
-  displayDuration: 2
+  promptPanel: {fileID: 0}
+  promptText: {fileID: 0}
+  defaultTemporaryDuration: 5
+  padding: {x: 30, y: 18}
 --- !u!1 &1474390285
 GameObject:
   m_ObjectHideFlags: 0
@@ -16604,8 +16605,15 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  clueItem: {fileID: 11400000, guid: 5ace081c0a573604f855c98ffaf30747, type: 2}
+  framePart1: {fileID: 0}
+  framePart2: {fileID: 0}
+  framePart3: {fileID: 0}
+  framePart4: {fileID: 0}
+  clockPart1: {fileID: 0}
   keyItem: {fileID: 11400000, guid: 74c35f4fd567aff4c8865035d446c260, type: 2}
+  clockRewardMessageDuration: 4
+  frameRewardHintDelay: 1.8
+  frameRewardMessageDuration: 5
 --- !u!1001 &1649314210
 PrefabInstance:
   m_ObjectHideFlags: 0
