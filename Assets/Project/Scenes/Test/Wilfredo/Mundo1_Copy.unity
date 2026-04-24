@@ -589,6 +589,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 3
+  cameraPivot: {fileID: 981547935}
+  mouseSensitivity: 3
+  rotationSmooth: 10
+  minPitch: -15
+  maxPitch: 35
   rayOrigin: {fileID: 1185388031}
   rayDistance: 0.7
   interactableLayer:
@@ -2396,6 +2401,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &981547935 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1492143020892391689, guid: 05269491f6728e94f839045aca351817, type: 3}
+  m_PrefabInstance: {fileID: 1908926655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1016617526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5482,8 +5492,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.0086, y: 9.511527, z: 12.008603}
-  m_Center: {x: -0.019200206, y: 0.13139583, z: 6.677796e-16}
+  m_Size: {x: 17.291082, y: 11.61068, z: 12.008603}
+  m_Center: {x: -1.1549926, y: -0.10417847, z: 1.10583116e-16}
 --- !u!114 &1977685246
 MonoBehaviour:
   m_ObjectHideFlags: 0

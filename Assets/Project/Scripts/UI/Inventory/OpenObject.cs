@@ -49,14 +49,23 @@ public class OpenObject : MonoBehaviour, IInteractable
 
         UI_Message.Instance?.ShowTemporary(msg, pickupMessageDuration);
 
-        if (objectCollider != null) objectCollider.enabled = false;
-        if (objectRenderer != null) objectRenderer.enabled = false;
+        // Solo desactiva colider y renderer si NO es la segunda pieza del reloj
+        if (!isSecondClockPiece)
+        {
+            if (objectCollider != null) objectCollider.enabled = false;
+            if (objectRenderer != null) objectRenderer.enabled = false;
+        }
     }
 
     public void ConsumeWorldObject()
     {
         opened = true;
-        if (objectCollider != null) objectCollider.enabled = false;
-        if (objectRenderer != null) objectRenderer.enabled = false;
+
+        // Solo desactiva colider y renderer si NO es la segunda pieza del reloj
+        if (!isSecondClockPiece)
+        {
+            if (objectCollider != null) objectCollider.enabled = false;
+            if (objectRenderer != null) objectRenderer.enabled = false;
+        }
     }
 }
