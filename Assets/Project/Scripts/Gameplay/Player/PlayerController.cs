@@ -82,11 +82,15 @@ public class PlayerController : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetFloat("Horizontal", input.x);
-            animator.SetFloat("Vertical", input.y);
+        
+            if (input.sqrMagnitude > 0)
+            {
+                animator.SetFloat("Horizontal", input.x);
+                animator.SetFloat("Vertical", input.y);
+            }
             animator.SetBool("isMoving", input.sqrMagnitude > 0);
         }
-
+        
         HandleRaycast();
         HandleCombinationHints();
 
