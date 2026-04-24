@@ -23,32 +23,24 @@ public class OpenObject : MonoBehaviour, IInteractable
         objectRenderer = GetComponent<Renderer>();
     }
 
-    public bool IsSecondClockPiece()
-    {
-        return isSecondClockPiece;
-    }
+    public bool IsSecondClockPiece() => isSecondClockPiece;
 
     public string GetInteractMessage()
     {
         if (opened) return "";
-
-        if (isSecondClockPiece)
-            return combineMessage;
-
-        if (itemInside == null)
-            return "";
-
+        if (isSecondClockPiece) return combineMessage;
+        if (itemInside == null) return "";
         return interactMessage;
     }
 
     public void Interact(PlayerController player)
     {
-        if (opened || itemInside == null || InventoryManager.Instance == null) return;
+        if (opened || itemInside == null || InventoryManager.Instance == null || isSecondClockPiece) return;
 
-        if (isSecondClockPiece)
-            return;
+        var inventory = InventoryManager.Instance.inventory;
+        if (inventory == null) return;
 
-        InventoryManager.Instance.inventory.AddItem(itemInside, amount);
+        inventory.AddItem(itemInside, amount);
         opened = true;
 
         string msg = string.IsNullOrWhiteSpace(itemInside.pickupMessage)
@@ -64,7 +56,6 @@ public class OpenObject : MonoBehaviour, IInteractable
     public void ConsumeWorldObject()
     {
         opened = true;
-
         if (objectCollider != null) objectCollider.enabled = false;
         if (objectRenderer != null) objectRenderer.enabled = false;
     }

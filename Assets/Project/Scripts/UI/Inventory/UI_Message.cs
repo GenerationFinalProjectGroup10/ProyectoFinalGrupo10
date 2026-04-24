@@ -3,29 +3,25 @@ using TMPro;
 using System.Collections;
 using UnityEngine.UI;
 
-
 public class UI_Message : MonoBehaviour
 {
     public static UI_Message Instance;
 
-
-    [Header("UI References")]
-    [SerializeField] private RectTransform messagePanel;
-    [SerializeField] private TextMeshProUGUI messageText;
-
+    [Header("Prompt UI")]
+    [SerializeField] private RectTransform promptPanel;
+    [SerializeField] private TextMeshProUGUI promptText;
 
     [Header("Durations")]
-    [SerializeField] private float defaultTemporaryDuration = 2f;
-
+    [SerializeField] private float defaultTemporaryDuration = 5f;
 
     [Header("Layout")]
     [SerializeField] private Vector2 padding = new Vector2(30f, 18f);
 
-
-    private Coroutine temporaryCoroutine;
-    private bool interactionMessageActive;
-    private string interactionMessage;
-
+    private Coroutine hideCoroutine;
+    private Coroutine queuedCoroutine;
+    private string currentMessage;
+    private bool locked;
+    private bool isTemporary;
 
     private void Awake()
     {
@@ -35,119 +31,121 @@ public class UI_Message : MonoBehaviour
             return;
         }
 
-
         Instance = this;
-
-
-        if (messagePanel == null)
-        {
-            Debug.LogError("UI_Message: messagePanel no asignado");
-            return;
-        }
-
-
-        if (messageText == null)
-        {
-            Debug.LogError("UI_Message: messageText no asignado");
-            return;
-        }
-
-
-        messagePanel.gameObject.SetActive(false);
+        if (promptPanel != null) promptPanel.gameObject.SetActive(false);
     }
-
 
     public void ShowInteraction(string message)
     {
-        if (messagePanel == null || messageText == null) return;
+        if (promptPanel == null || promptText == null) return;
+        if (locked || isTemporary) return;
+        if (promptPanel.gameObject.activeSelf && currentMessage == message) return;
 
-
-        interactionMessageActive = true;
-        interactionMessage = message;
-
-
-        if (temporaryCoroutine != null)
-        {
-            StopCoroutine(temporaryCoroutine);
-            temporaryCoroutine = null;
-        }
-
-
-        messageText.text = message;
-        messagePanel.gameObject.SetActive(true);
+        StopHide();
+        currentMessage = message;
+        promptText.text = message;
+        promptPanel.gameObject.SetActive(true);
         ResizePanel(message);
     }
 
-
-    public void HideInteraction()
+    public void ShowInteractionQueued(string message, float delay)
     {
-        interactionMessageActive = false;
-        interactionMessage = "";
+        if (promptPanel == null || promptText == null) return;
 
+        if (queuedCoroutine != null)
+            StopCoroutine(queuedCoroutine);
 
-        if (temporaryCoroutine == null)
-        {
-            if (messagePanel != null)
-                messagePanel.gameObject.SetActive(false);
-        }
+        queuedCoroutine = StartCoroutine(ShowAfterDelay(message, delay, 0f));
     }
-
 
     public void ShowTemporary(string message)
     {
         ShowTemporary(message, defaultTemporaryDuration);
     }
 
-
     public void ShowTemporary(string message, float duration)
     {
-        if (messagePanel == null || messageText == null) return;
+        if (promptPanel == null || promptText == null) return;
 
-
-        if (temporaryCoroutine != null)
+        if (queuedCoroutine != null)
         {
-            StopCoroutine(temporaryCoroutine);
-            temporaryCoroutine = null;
+            StopCoroutine(queuedCoroutine);
+            queuedCoroutine = null;
         }
 
-
-        messageText.text = message;
-        messagePanel.gameObject.SetActive(true);
+        StopHide();
+        isTemporary = true;
+        currentMessage = message;
+        promptText.text = message;
+        promptPanel.gameObject.SetActive(true);
         ResizePanel(message);
-
-
-        temporaryCoroutine = StartCoroutine(HideTemporaryAfterDelay(duration));
+        hideCoroutine = StartCoroutine(HideAfter(duration));
     }
 
+    public void HideInteraction()
+    {
+        if (locked || isTemporary) return;
+        StopHide();
+        currentMessage = null;
+        if (promptPanel != null) promptPanel.gameObject.SetActive(false);
+    }
+
+    public void LockPrompt()
+    {
+        locked = true;
+    }
+
+    public void UnlockPrompt()
+    {
+        locked = false;
+    }
+
+    public void ClearPrompt()
+    {
+        currentMessage = null;
+        isTemporary = false;
+        if (promptPanel != null) promptPanel.gameObject.SetActive(false);
+    }
+
+    private IEnumerator ShowAfterDelay(string message, float delay, float hideAfter)
+    {
+        yield return new WaitForSeconds(delay);
+        isTemporary = false;
+        currentMessage = message;
+        promptText.text = message;
+        promptPanel.gameObject.SetActive(true);
+        ResizePanel(message);
+        queuedCoroutine = null;
+
+        if (hideAfter > 0f)
+        {
+            StopHide();
+            hideCoroutine = StartCoroutine(HideAfter(hideAfter));
+        }
+    }
+
+    private IEnumerator HideAfter(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        hideCoroutine = null;
+        isTemporary = false;
+        if (promptPanel != null)
+            promptPanel.gameObject.SetActive(false);
+    }
+
+    private void StopHide()
+    {
+        if (hideCoroutine != null)
+        {
+            StopCoroutine(hideCoroutine);
+            hideCoroutine = null;
+        }
+    }
 
     private void ResizePanel(string message)
     {
         Canvas.ForceUpdateCanvases();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(messagePanel);
-
-
-        Vector2 textSize = messageText.GetPreferredValues(message);
-        messagePanel.sizeDelta = textSize + padding;
-    }
-
-
-    private IEnumerator HideTemporaryAfterDelay(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-
-
-        temporaryCoroutine = null;
-
-
-        if (interactionMessageActive)
-        {
-            messageText.text = interactionMessage;
-            messagePanel.gameObject.SetActive(true);
-            ResizePanel(interactionMessage);
-        }
-        else if (messagePanel != null)
-        {
-            messagePanel.gameObject.SetActive(false);
-        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(promptPanel);
+        promptPanel.sizeDelta = promptText.GetPreferredValues(message) + padding;
     }
 }
