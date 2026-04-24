@@ -26,6 +26,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Mundo3.unity
     guid: abddb8401a881c84b87caa5ea5f67662
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/Pato/MundoReal.unity
+    guid: d0c2475cdd470d64ca71e5054d80fd60
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/Pato/MundoAlternoDulce.unity
+    guid: 38f1f09867ae35a419a7a03dd7780bdd
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/Pato/MundoAlternoMalo.unity
+    guid: 6a8bec910aac8ae489e5ad92eb751a97
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/Pato/Sotano.unity
+    guid: 307bdf0228e87b14687243488b928da8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
