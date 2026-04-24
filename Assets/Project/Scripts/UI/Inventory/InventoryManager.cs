@@ -14,6 +14,9 @@ public class InventoryManager : MonoBehaviour
         }
 
         Instance = this;
-        inventory = new Inventory();
+        DontDestroyOnLoad(gameObject);
+
+        if (inventory == null)
+            inventory = new Inventory();
     }
 }
