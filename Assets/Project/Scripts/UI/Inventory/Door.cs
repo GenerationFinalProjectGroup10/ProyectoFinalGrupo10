@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemSO requiredKey;
+    [SerializeField] private string nextSceneName = "SampleScene";
     private Collider doorCollider;
     private bool opened;
 
@@ -11,6 +13,7 @@ public class Door : MonoBehaviour, IInteractable
         doorCollider = GetComponent<Collider>();
     }
 
+    // ✅ MÉTODOS COMPLETOS de IInteractable
     public string GetInteractMessage()
     {
         if (opened) return "";
@@ -37,11 +40,24 @@ public class Door : MonoBehaviour, IInteractable
         }
     }
 
+    // ✅ MÉTODO FALTANTE - Agregar este
+    public bool CanInteract()
+    {
+        return !opened && InventoryManager.Instance != null && requiredKey != null;
+    }
+
     private void OpenDoor()
     {
         opened = true;
         UI_Message.Instance?.ShowTemporary("¡Puerta abierta!", 2.5f);
 
         if (doorCollider != null) doorCollider.enabled = false;
+        Invoke("ChangeScene", 2.5f);
+    }
+
+    private void ChangeScene()
+    {
+        Debug.Log($"Cargando escena: '{nextSceneName}'");
+        SceneManager.LoadScene(nextSceneName);
     }
 }
