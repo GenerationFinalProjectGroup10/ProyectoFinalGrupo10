@@ -43,14 +43,19 @@ public class PlayerController : MonoBehaviour
     private float yaw;
     private float pitch;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        TryAutoAssignReferences();
+    }
 
-        yaw = 0f;
+    void Start()
+    {
+        TryAutoAssignReferences();
+
+        yaw = transform.eulerAngles.y;
         pitch = 0f;
-        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
 
         if (cameraPivot != null)
             cameraPivot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
@@ -61,28 +66,32 @@ public class PlayerController : MonoBehaviour
         if (rb == null)
         {
             Debug.LogError("No Rigidbody en Player");
+            enabled = false;
             return;
         }
 
         if (animator == null)
-        {
             Debug.LogError("No Animator en Player");
-        }
+    }
+
+    void OnEnable()
+    {
+        TryAutoAssignReferences();
     }
 
     void Update()
     {
+        TryAutoAssignReferences();
+
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
         HandleCameraRotation();
 
-        // ✅ CORREGIDO: lookDirection SIEMPRE sigue rotación del jugador (mouse)
         lookDirection = transform.forward;
 
         if (animator != null)
         {
-        
             if (input.sqrMagnitude > 0)
             {
                 animator.SetFloat("Horizontal", input.x);
@@ -90,7 +99,7 @@ public class PlayerController : MonoBehaviour
             }
             animator.SetBool("isMoving", input.sqrMagnitude > 0);
         }
-        
+
         HandleRaycast();
         HandleCombinationHints();
 
@@ -100,6 +109,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (rb == null) return;
+
         Quaternion moveRotation = Quaternion.Euler(0f, yaw, 0f);
 
         Vector3 forward = moveRotation * Vector3.forward;
@@ -140,7 +151,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleRaycast()
     {
-        if (rayOrigin == null || InventoryManager.Instance == null) return;
+        if (rayOrigin == null) return;
+        if (InventoryManager.Instance == null) return;
 
         Debug.DrawRay(rayOrigin.position, lookDirection * rayDistance, Color.red);
 
@@ -252,7 +264,7 @@ public class PlayerController : MonoBehaviour
     {
         frameRewardGiven = true;
 
-        var inventory = InventoryManager.Instance.inventory;
+        var inventory = InventoryManager.Instance != null ? InventoryManager.Instance.inventory : null;
         if (inventory != null)
         {
             inventory.RemoveItem(framePart1, 1);
@@ -262,7 +274,27 @@ public class PlayerController : MonoBehaviour
             inventory.AddItem(clockPart1, 1);
         }
 
-        UI_Message.Instance?.ShowTemporary("¡Completaste el portaretrato! Obtienes la pieza del reloj.", frameRewardMessageDuration);
+        UI_Message.Instance?.ShowTemporary(
+            "¡Completaste el portaretrato! Obtienes la pieza del reloj.",
+            frameRewardMessageDuration
+        );
         yield break;
+    }
+
+    private void TryAutoAssignReferences()
+    {
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (animator == null) animator = GetComponent<Animator>();
+
+        if (rayOrigin == null)
+        {
+            if (cameraPivot != null)
+                rayOrigin = cameraPivot;
+            else if (Camera.main != null)
+                rayOrigin = Camera.main.transform;
+        }
+
+        if (cameraPivot == null && Camera.main != null)
+            cameraPivot = Camera.main.transform;
     }
 }
