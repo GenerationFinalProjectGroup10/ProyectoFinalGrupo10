@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 108733431}
   - component: {fileID: 108733430}
   m_Layer: 6
-  m_Name: FramePart1
+  m_Name: TempFramePart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11129,7 +11129,7 @@ GameObject:
   - component: {fileID: 1194112244}
   - component: {fileID: 1194112243}
   m_Layer: 6
-  m_Name: FramePart2
+  m_Name: TempFramePart2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16058,11 +16058,11 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 64
-  framePart1: {fileID: 0}
-  framePart2: {fileID: 0}
-  framePart3: {fileID: 0}
-  framePart4: {fileID: 0}
-  clockPart1: {fileID: 0}
+  framePart1: {fileID: 11400000, guid: 911fc8ff5a35d7e43aaa837c4845fdab, type: 2}
+  framePart2: {fileID: 11400000, guid: a00c6d17d19d5734297628e4e5726b5c, type: 2}
+  framePart3: {fileID: 11400000, guid: e7b46bdad1e83bf488264f4591bfa11c, type: 2}
+  framePart4: {fileID: 11400000, guid: 8b9928ce286e6774781281377119a762, type: 2}
+  clockPart1: {fileID: 11400000, guid: a24d3c4d13bcb474d851b8bb3b8299fe, type: 2}
   keyItem: {fileID: 11400000, guid: 74c35f4fd567aff4c8865035d446c260, type: 2}
   clockRewardMessageDuration: 4
   frameRewardHintDelay: 1.8
