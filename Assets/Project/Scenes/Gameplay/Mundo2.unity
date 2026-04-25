@@ -17735,11 +17735,63 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reloj
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3a8c4a0090161054f9aaac0f7785ea49, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 3a8c4a0090161054f9aaac0f7785ea49, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a8c4a0090161054f9aaac0f7785ea49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1765777819}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a8c4a0090161054f9aaac0f7785ea49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1765777818}
   m_SourcePrefab: {fileID: 100100000, guid: 3a8c4a0090161054f9aaac0f7785ea49, type: 3}
+--- !u!1 &1765777817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a8c4a0090161054f9aaac0f7785ea49, type: 3}
+  m_PrefabInstance: {fileID: 1765777816}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1765777818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765777817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4448d4a3a682744994480efa93ad576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpenObject
+  itemInside: {fileID: 11400000, guid: 43dd1d58651ccf745b6167e3046a03e2, type: 2}
+  amount: 1
+  interactMessage: Presiona E para recoger
+  combineMessage: Presiona C para juntar la manecilla con el reloj
+  pickupMessageDuration: 3
+  isSecondClockPiece: 1
+--- !u!114 &1765777819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765777817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f85c18e9b97904e8a030724d076bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClockProximityMessage
+  requiredClockPart: {fileID: 11400000, guid: a24d3c4d13bcb474d851b8bb3b8299fe, type: 2}
+  message: Junta las cuatro partes del portaretrato para obtener la manecilla del
+    reloj
 --- !u!1001 &1766522994
 PrefabInstance:
   m_ObjectHideFlags: 0
