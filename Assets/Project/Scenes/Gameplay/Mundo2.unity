@@ -1211,7 +1211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.9, y: -28.4}
+  m_AnchoredPosition: {x: 29.9, y: -75.9}
   m_SizeDelta: {x: 117.4, y: 11.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &122584529
@@ -1261,15 +1261,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
+  m_fontSize: 23.5
   m_fontSizeBase: 10
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 43.823044, w: 0.51782227}
+  m_margin: {x: -108.53215, y: -6.553543, z: -50.07071, w: -8.302958}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1940, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -2490,10 +2490,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
+  m_fontSize: 19.6
   m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -2529,7 +2529,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -32.40469, y: 0, z: 1.7400208, w: 0.51782227}
+  m_margin: {x: -165.48303, y: -11.056203, z: -133.52574, w: 0.51782227}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2559,7 +2559,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: -2.8}
+  m_AnchoredPosition: {x: 14.200012, y: 0}
   m_SizeDelta: {x: 117.4, y: 11.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &206751746
@@ -2681,7 +2681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CLUES
+  m_text: PISTAS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -3431,10 +3431,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 31.75
   m_fontSizeBase: 18
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -3470,7 +3470,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -9.80426, w: 1.9541016}
+  m_margin: {x: -140.82756, y: -19.803154, z: -142.54662, w: 6.579334}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3498,11 +3498,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2008215380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -5.9, y: -19.1}
-  m_SizeDelta: {x: 137.8, y: 17.6}
-  m_Pivot: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000061035156, y: 16.8}
+  m_SizeDelta: {x: 137.8, y: 22.29}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &284832328 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6907596136162864626, guid: 63ace97a0b85b23438c7c39cd152e9f5, type: 3}
@@ -5850,12 +5850,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -7641,81 +7641,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.866409, y: 1.487364, z: 0.21900661}
   m_Center: {x: 5.154251, y: 1.3852328, z: 1.47859}
---- !u!1 &652530420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 652530421}
-  - component: {fileID: 652530423}
-  - component: {fileID: 652530422}
-  m_Layer: 5
-  m_Name: reloj
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &652530421
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652530420}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.9495, y: 1.3501803, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2008215380}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.80000305, y: -1.2000008}
-  m_SizeDelta: {x: 51.7, y: 54.2}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &652530422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652530420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: a301f3235daa4f84bb801b33fa0f9570, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &652530423
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652530420}
-  m_CullTransparentMesh: 1
 --- !u!1001 &654771212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9415,23 +9340,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'YOU MUST FIND THE PORTRAIT FRAGMENTS
-
-    AND JOIN THEM TO RECOVER THE
-    CLOCK HAND.
-
-
-    WITH THE HAND, YOU WILL BE ABLE TO ACTIVATE THE CLOCK
-
-    AND
-    IT WILL REVEAL THE KEY TO YOU...
-
-
-    THE KEY THAT OPENS THE MAIN DOOR.
-
-
-    DON''T
-    GIVE UP!'
+  m_text: "DEBES ENCONTRAR LOS FRAGMENTOS DEL RETRATO\nY UNIRLOS PARA RECUPERAR LA
+    MANECILLA DEL RELOJ.\n\nCON LA MANECILLA, PODR\xC1S ACTIVAR EL RELOJ\nY ESTE
+    TE REVELAR\xC1 LA LLAVE...\n\nLA LLAVE QUE ABRE LA PUERTA PRINCIPAL.\n\n\xA1NO
+    TE RINDAS!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -17054,7 +16966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PRESS ANY KEY TO EXIT...
+  m_text: PRESIONA CUALQUIER TECLA PARA SALIR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -20489,7 +20401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PRESS [ E ]'
+  m_text: 'PRESIONAR [ E ]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
   m_sharedMaterial: {fileID: 7221948332095006955, guid: 10248acbd766a074995b4773d2cbe3b6, type: 2}
@@ -23834,7 +23746,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 652530421}
   - {fileID: 2080294952}
   - {fileID: 278351867}
   - {fileID: 201964704}
@@ -23843,8 +23754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.60131836, y: 1}
-  m_SizeDelta: {x: 208.2, y: 76.4}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2008215381
 MonoBehaviour:
@@ -23859,15 +23770,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: e3aec0a027f3ad4458f7460e6b0d40f1, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -25132,11 +25043,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2008215380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.199997, y: 5.299999}
-  m_SizeDelta: {x: 39.59, y: 23.68}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.000061035156, y: -51.6}
+  m_SizeDelta: {x: 111.9, y: 50}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2080472593 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6568d7a87627ab549ba093b16fa4582f, type: 3}
@@ -26211,6 +26122,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 498887371}
+  - {fileID: 853776182}
   - {fileID: 323319974}
   - {fileID: 1996947145}
   - {fileID: 104841386}
@@ -26218,8 +26131,6 @@ SceneRoots:
   - {fileID: 56443440}
   - {fileID: 1046287084}
   - {fileID: 1765777816}
-  - {fileID: 498887371}
-  - {fileID: 853776182}
   - {fileID: 1190536635}
   - {fileID: 371129610}
   - {fileID: 1288111186}
