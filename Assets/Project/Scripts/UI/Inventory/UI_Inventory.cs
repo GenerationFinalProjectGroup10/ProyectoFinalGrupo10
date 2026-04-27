@@ -60,6 +60,9 @@ public class UI_Inventory : MonoBehaviour
     {
         if (inventory == null || itemSlotContainer == null || itemSlotTemplate == null) return;
 
+        //log en consola al abrir la puerta
+        Debug.Log("UI_Inventory: Refrescando UI. Items actuales: " + inventory.items.Count);
+
         foreach (Transform child in itemSlotContainer)
         {
             if (child == itemSlotTemplate) continue;
@@ -71,8 +74,12 @@ public class UI_Inventory : MonoBehaviour
             Transform slot = Instantiate(itemSlotTemplate, itemSlotContainer);
             slot.gameObject.SetActive(true);
 
-            slot.Find("Icon").GetComponent<UnityEngine.UI.Image>().sprite = invItem.item.icon;
-            slot.Find("AmountText").GetComponent<TextMeshProUGUI>().text = invItem.amount.ToString();
+            // Verifica que los componentes existan antes de acceder
+            var icon = slot.Find("Icon")?.GetComponent<UnityEngine.UI.Image>();
+            var text = slot.Find("AmountText")?.GetComponent<TextMeshProUGUI>();
+
+            if (icon != null) icon.sprite = invItem.item.icon;
+            if (text != null) text.text = invItem.amount.ToString();
         }
     }
 }

@@ -14,5 +14,5 @@ public enum ItemType
     Key,
     FramePart,
     ClockPart,
-    Potion
+    Frame
 }

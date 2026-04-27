@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (!clockRewardGiven && hasClockPart1 && isLookingAtSecondClockPiece && !isInClockProximity)
         {
-            UI_Message.Instance?.ShowInteraction("Presiona C para juntar la pieza del reloj con la encontrada");
+            UI_Message.Instance?.ShowInteraction("Presiona C para juntar las piezas del reloj");
         }
     }
 
@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
             clockRewardGiven = true;
 
             UI_Message.Instance?.ShowTemporary(
-                "¡Uniste la pieza del reloj con la encontrada y obtuviste la llave!",
+                "¡Ya tienes la llave para abrir la puerta!",
                 clockRewardMessageDuration
             );
             return;
@@ -275,7 +275,7 @@ public class PlayerController : MonoBehaviour
         }
 
         UI_Message.Instance?.ShowTemporary(
-            "¡Completaste el portaretrato! Obtienes la pieza del reloj.",
+            "¡Completaste el portaretrato! Has obtenido la manecilla del reloj.",
             frameRewardMessageDuration
         );
         yield break;

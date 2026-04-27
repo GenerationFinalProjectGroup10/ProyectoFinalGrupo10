@@ -27,8 +27,14 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/Gameplay/Sotano.unity
     guid: 2a9421d1af0f118409250b0258810016
   - enabled: 1
+    path: Assets/Project/Scenes/Test/Wilfredo/Sotano 1.unity
+    guid: 1e83a2ebaeb955c489d1a3b57d7dccd2
+  - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Mundo3.unity
     guid: abddb8401a881c84b87caa5ea5f67662
+  - enabled: 1
+    path: Assets/Project/Scenes/Test/Wilfredo/Mundo3 1.unity
+    guid: 331d187314e279544beb20d7193cffcb
   - enabled: 1
     path: Assets/Project/Scenes/Test/Pato/MundoReal.unity
     guid: d0c2475cdd470d64ca71e5054d80fd60

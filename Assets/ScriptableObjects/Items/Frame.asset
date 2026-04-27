@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 044dd1a965b567149925e42e5e4c0c89, type: 3}
-  m_Name: Key
+  m_Name: Frame
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: Llave
-  icon: {fileID: -1082166619, guid: f5765dbac83d6d74aa468da7d2424ff0, type: 3}
-  type: 0
-  pickupMessage: "\xA1Ya tienes la llave para abrir la puerta!"
+  itemName: Portaretrato
+  icon: {fileID: 1375988425, guid: 190a166151fc210408e8c410192e404e, type: 3}
+  type: 3
+  pickupMessage: "\xA1Has encontrado el portaretrato!, ahora ve por la llave."
