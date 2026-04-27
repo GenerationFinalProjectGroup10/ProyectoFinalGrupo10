@@ -18454,6 +18454,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: a87c1fa2d8c5a4f4cb4ee248094b49f1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 16ad8bea2b86b3f46af04df838036e09, type: 2}
     - target: {fileID: 919132149155446097, guid: a87c1fa2d8c5a4f4cb4ee248094b49f1, type: 3}
       propertyPath: m_Name
       value: Piso
