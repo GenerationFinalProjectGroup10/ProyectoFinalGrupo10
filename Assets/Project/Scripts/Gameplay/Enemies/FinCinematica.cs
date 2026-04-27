@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class FinCinematica : MonoBehaviour
 {
-    public void IrAlMundo1()
+    public void IrAlMundo2()
     {
         SceneManager.LoadScene("Mundo2");
     }

@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Sotano.unity
     guid: 2a9421d1af0f118409250b0258810016
+  - enabled: 1
+    path: Assets/Project/Scenes/Gameplay/Cinematica_Oso.unity
+    guid: e529f6ae5200cce4b98b59f61523ca46
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

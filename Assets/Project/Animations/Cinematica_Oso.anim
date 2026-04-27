@@ -22,28 +22,28 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 21300000, guid: cbb93735119f18a47b8f0efb45f75a02, type: 3}
-    - time: 0.2
+    - time: 0.25
       value: {fileID: 21300000, guid: f2b0236ea818aa841ac4acc9de11a7ae, type: 3}
-    - time: 0.4
+    - time: 0.5
       value: {fileID: 21300000, guid: f7785e42aeeeb6a4a85d137ff9db110c, type: 3}
-    - time: 0.6
+    - time: 0.75
       value: {fileID: 21300000, guid: 6639a4335cee3464480c98b7c3437fe7, type: 3}
-    - time: 0.8
-      value: {fileID: 21300000, guid: 4026246d4018da845b1425070cbbf1e4, type: 3}
     - time: 1
+      value: {fileID: 21300000, guid: 4026246d4018da845b1425070cbbf1e4, type: 3}
+    - time: 1.25
       value: {fileID: 21300000, guid: 900968ec21c16534ba7f05bfdb6b1066, type: 3}
-    - time: 1.2
+    - time: 1.5
       value: {fileID: 21300000, guid: 7da035d672fdfb94e87f32ea5f7810fa, type: 3}
-    - time: 1.4
+    - time: 1.75
       value: {fileID: 21300000, guid: 226a59fc620fed54c8a46e6e808b7dd3, type: 3}
-    - time: 1.6
+    - time: 2
       value: {fileID: 21300000, guid: 5afbd73d7c1a5ca46b4208595f85a408, type: 3}
     attribute: m_Sprite
     path: 
     classID: 114
     script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
     flags: 2
-  m_SampleRate: 5
+  m_SampleRate: 4
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -74,7 +74,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.8000001
+    m_StopTime: 2.25
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,15 +94,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.4
+  - time: 0.5
     functionName: PlayVoz
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.8
-    functionName: IrAlMundo1
+  - time: 2.25
+    functionName: IrAlMundo2
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
