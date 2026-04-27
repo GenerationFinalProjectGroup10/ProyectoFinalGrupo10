@@ -13465,6 +13465,7 @@ GameObject:
   - component: {fileID: 1353836578}
   - component: {fileID: 1353836577}
   - component: {fileID: 1353836576}
+  - component: {fileID: 1353836581}
   m_Layer: 6
   m_Name: FramePart3
   m_TagString: Untagged
@@ -13597,6 +13598,18 @@ RectTransform:
   m_AnchoredPosition: {x: 11.354, y: -0.017}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1353836581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353836575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3901f15fc259504c81ebe67096eedb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItemInteractable
 --- !u!1001 &1369561011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14117,9 +14130,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1411489165}
   - component: {fileID: 1411489164}
-  - component: {fileID: 1411489163}
   - component: {fileID: 1411489162}
   - component: {fileID: 1411489161}
+  - component: {fileID: 1411489163}
+  - component: {fileID: 1411489166}
   m_Layer: 6
   m_Name: FramePart2
   m_TagString: Untagged
@@ -14252,6 +14266,18 @@ RectTransform:
   m_AnchoredPosition: {x: 9.616995, y: 0.017793}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1411489166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411489160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3901f15fc259504c81ebe67096eedb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItemInteractable
 --- !u!4 &1413238120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1446ef32f7da244438bdc6ec4da27854, type: 3}
@@ -18456,6 +18482,7 @@ GameObject:
   - component: {fileID: 1785663689}
   - component: {fileID: 1785663688}
   - component: {fileID: 1785663687}
+  - component: {fileID: 1785663692}
   m_Layer: 6
   m_Name: FramePart1
   m_TagString: Untagged
@@ -18588,6 +18615,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.096}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1785663692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785663686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3901f15fc259504c81ebe67096eedb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItemInteractable
 --- !u!1001 &1787200259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19165,6 +19204,7 @@ GameObject:
   - component: {fileID: 1884758023}
   - component: {fileID: 1884758022}
   - component: {fileID: 1884758021}
+  - component: {fileID: 1884758025}
   m_Layer: 6
   m_Name: FramePart1 (1)
   m_TagString: Untagged
@@ -19297,6 +19337,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9895658, y: 2.499792, z: 5.3798156}
   m_Center: {x: 0.5465653, y: -0.21347637, z: 2.4017954}
+--- !u!114 &1884758025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884758019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3901f15fc259504c81ebe67096eedb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItemInteractable
 --- !u!1001 &1885477459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21553,6 +21605,7 @@ GameObject:
   - component: {fileID: 2083358743}
   - component: {fileID: 2083358742}
   - component: {fileID: 2083358741}
+  - component: {fileID: 2083358746}
   m_Layer: 6
   m_Name: FramePart4
   m_TagString: Untagged
@@ -21685,6 +21738,18 @@ RectTransform:
   m_AnchoredPosition: {x: 13.938, y: -0.053}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2083358746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083358740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3901f15fc259504c81ebe67096eedb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupItemInteractable
 --- !u!1001 &2100594486
 PrefabInstance:
   m_ObjectHideFlags: 0
