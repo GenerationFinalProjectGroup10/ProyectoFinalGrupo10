@@ -1536,7 +1536,10 @@ MonoBehaviour:
       responseVoiceClip: {fileID: 0}
     voiceClip: {fileID: 0}
   sceneFader: {fileID: 1229838855}
-  nextSceneName: Mundo1
+  nextSceneName: Dialogos2
+  usePauseSystem: 0
+  pauseEndFade: 0
+  waitingExternalResume: 0
 --- !u!4 &121127757
 Transform:
   m_ObjectHideFlags: 0
