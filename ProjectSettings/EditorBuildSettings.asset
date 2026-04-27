@@ -18,35 +18,23 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/Gameplay/Dialogos.unity
     guid: 62b6f91e42bde274d8522bc07258ea9b
   - enabled: 1
+    path: Assets/Project/Scenes/Gameplay/Dialogos2.unity
+    guid: 038c6914ae3ca5c45a115e7039caf4e0
+  - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Mundo1.unity
     guid: 2e94871ba4407af4aa7ee9b01e6d68d3
   - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Mundo2.unity
     guid: f757332b17cbb454fbd712a3bc52e975
   - enabled: 1
-    path: Assets/Project/Scenes/Gameplay/Sotano.unity
-    guid: 2a9421d1af0f118409250b0258810016
-  - enabled: 1
-    path: Assets/Project/Scenes/Test/Wilfredo/Sotano 1.unity
-    guid: 1e83a2ebaeb955c489d1a3b57d7dccd2
-  - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Mundo3.unity
     guid: abddb8401a881c84b87caa5ea5f67662
   - enabled: 1
-    path: Assets/Project/Scenes/Test/Wilfredo/Mundo3 1.unity
-    guid: 331d187314e279544beb20d7193cffcb
+    path: Assets/Project/Scenes/Gameplay/Sotano.unity
+    guid: 2a9421d1af0f118409250b0258810016
   - enabled: 1
-    path: Assets/Project/Scenes/Test/Pato/MundoReal.unity
-    guid: d0c2475cdd470d64ca71e5054d80fd60
-  - enabled: 1
-    path: Assets/Project/Scenes/Test/Pato/MundoAlternoDulce.unity
-    guid: 38f1f09867ae35a419a7a03dd7780bdd
-  - enabled: 1
-    path: Assets/Project/Scenes/Test/Pato/MundoAlternoMalo.unity
-    guid: 6a8bec910aac8ae489e5ad92eb751a97
-  - enabled: 1
-    path: Assets/Project/Scenes/Test/Pato/Sotano.unity
-    guid: 307bdf0228e87b14687243488b928da8
+    path: Assets/Project/Scenes/Gameplay/Cinematica_Oso.unity
+    guid: e529f6ae5200cce4b98b59f61523ca46
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

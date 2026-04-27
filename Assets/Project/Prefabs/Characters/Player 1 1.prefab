@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2399086892146832914}
   m_Layer: 0
   m_Name: Player 1 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,8 +168,15 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 0
-  clueItem: {fileID: 0}
+  framePart1: {fileID: 0}
+  framePart2: {fileID: 0}
+  framePart3: {fileID: 0}
+  framePart4: {fileID: 0}
+  clockPart1: {fileID: 0}
   keyItem: {fileID: 0}
+  clockRewardMessageDuration: 4
+  frameRewardHintDelay: 1.8
+  frameRewardMessageDuration: 5
 --- !u!135 &2399086892146832914
 SphereCollider:
   m_ObjectHideFlags: 0

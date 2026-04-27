@@ -49,10 +49,20 @@ public class ClockManager : MonoBehaviour
         _currentTime = DateTime.Today.AddHours(3);
         _lastHourChecked = _currentTime.Hour;
         _lastMinuteChecked = _currentTime.Minute;
+
+        // ✅ Arranque automático: el reloj corre desde el primer frame
+        IniciarReloj();
     }
 
     void Start()
     {
+        // Suscribirse con un frame de delay para no contar la escena inicial como "cambio de escena"
+        StartCoroutine(RegistrarEventoCambioEscena());
+    }
+
+    private IEnumerator RegistrarEventoCambioEscena()
+    {
+        yield return null; // espera un frame
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -167,4 +177,9 @@ public class ClockManager : MonoBehaviour
     }
 
     public DateTime GetCurrentTime() => _currentTime;
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 }
