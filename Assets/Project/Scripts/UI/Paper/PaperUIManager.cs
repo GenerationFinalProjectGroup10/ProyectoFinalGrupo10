@@ -57,8 +57,8 @@ public class PaperUIManager : MonoBehaviour
             StartCoroutine(FadePanel(noteCanvasGroup, true));
 
             // Desbloquear cursor para poder hacer clic en "Cerrar"
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
         }
         else
         {

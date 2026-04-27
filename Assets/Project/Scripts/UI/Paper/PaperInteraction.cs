@@ -12,10 +12,10 @@ public class PaperInteraction : MonoBehaviour
     private Transform playerTransform;
     private bool isPlayerNearby = false;
     private bool isNoteOpen = false;
+    private float openTime = 0f;
 
     void Start()
     {
-        // Buscar al jugador automáticamente por su tag
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -26,7 +26,6 @@ public class PaperInteraction : MonoBehaviour
             Debug.LogWarning("PaperInteraction: No se encontró un GameObject con tag 'Player'.");
         }
 
-        // Verificar que el uiManager esté asignado
         if (uiManager == null)
         {
             Debug.LogError("PaperInteraction: El campo 'UI Manager' no está asignado en el Inspector.");
@@ -39,31 +38,29 @@ public class PaperInteraction : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, playerTransform.position);
 
-        // Detectar si el jugador está cerca
         if (distance <= interactionDistance)
         {
+            // Mostrar prompt solo si la nota no está abierta
             if (!isPlayerNearby)
             {
                 isPlayerNearby = true;
-                uiManager.ShowPrompt(true); // Mostrar "Presiona E para leer"
+                if (!isNoteOpen)
+                    uiManager.ShowPrompt(true);
             }
 
-            // Si el jugador presiona E
-            if (Input.GetKeyDown(KeyCode.E))
+            // Abrir nota con E
+            if (Input.GetKeyDown(KeyCode.E) && !isNoteOpen)
             {
-                if (!isNoteOpen)
-                {
-                    isNoteOpen = true;
-                    uiManager.ShowPrompt(false);   // Ocultar el prompt
-                    uiManager.ShowNote(true);       // Mostrar la nota
-                    // Opcional: pausar el juego mientras lee
-                    // Time.timeScale = 0f;
-                }
-                else
-                {
-                    // Si ya está abierta, cerrar con E también
-                    CloseNote();
-                }
+                isNoteOpen = true;
+                openTime = Time.time;
+                uiManager.ShowPrompt(false);
+                uiManager.ShowNote(true);
+            }
+
+            // Cerrar con cualquier tecla, esperando 0.2s para evitar conflicto con E
+            if (isNoteOpen && Input.anyKeyDown && Time.time > openTime + 0.2f)
+            {
+                CloseNote();
             }
         }
         else
@@ -74,7 +71,6 @@ public class PaperInteraction : MonoBehaviour
                 isPlayerNearby = false;
                 uiManager.ShowPrompt(false);
 
-                // Si la nota estaba abierta, cerrarla automáticamente
                 if (isNoteOpen)
                 {
                     CloseNote();
@@ -83,11 +79,9 @@ public class PaperInteraction : MonoBehaviour
         }
     }
 
-    // Método público para que el botón "Cerrar" del Canvas también lo llame
     public void CloseNote()
     {
         isNoteOpen = false;
         uiManager.ShowNote(false);
-        // Si habías pausado: Time.timeScale = 1f;
     }
 }
