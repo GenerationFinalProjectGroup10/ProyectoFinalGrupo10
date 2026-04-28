@@ -5712,6 +5712,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2932155827456694563, guid: 77723f1dab501e948a61d21025cd3d84, type: 3}
+      propertyPath: gameTimeMultiplier
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 8448911199525823840, guid: 77723f1dab501e948a61d21025cd3d84, type: 3}
       propertyPath: m_Name
       value: ClockManager

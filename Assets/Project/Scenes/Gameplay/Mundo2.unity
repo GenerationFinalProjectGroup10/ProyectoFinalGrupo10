@@ -4554,6 +4554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   requiredKey: {fileID: 11400000, guid: 74c35f4fd567aff4c8865035d446c260, type: 2}
   requiredFrame: {fileID: 0}
+  requiredBear: {fileID: 0}
   nextSceneName: Mundo3
 --- !u!65 &371129609
 BoxCollider:
@@ -8977,6 +8978,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5285302849607213507, guid: 8a9546f1de421e845afb765954e50d35, type: 3}
   m_PrefabInstance: {fileID: 750782792}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &758167168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 758167170}
+  - component: {fileID: 758167169}
+  m_Layer: 0
+  m_Name: SceneWelcomeMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &758167169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758167168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b2e9182db32884bb17f5f368b80cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneWelcomeMessage
+  message: "\xA1Busca las cartas, te ayudaran!"
+  duration: 5
+--- !u!4 &758167170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758167168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.68263, y: -0.11543, z: -4.75502}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &760083360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15773,35 +15820,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.512169
+      value: -8.937
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.047
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.424
+      value: 5.543
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8603253
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5097455
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -61.294
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8336ea49bee91a444abb0b31c7f74d0e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -26163,3 +26210,4 @@ SceneRoots:
   - {fileID: 1190536635}
   - {fileID: 371129610}
   - {fileID: 1288111186}
+  - {fileID: 758167170}
