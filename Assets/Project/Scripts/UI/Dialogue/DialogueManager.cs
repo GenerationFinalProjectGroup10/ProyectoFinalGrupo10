@@ -41,7 +41,6 @@ public class DialogueManager : MonoBehaviour
 
     private int currentNode = 0;
     private Coroutine typingCoroutine;
-
     private DialogueOption currentOption;
 
     void Start()
@@ -109,28 +108,26 @@ public class DialogueManager : MonoBehaviour
         speakerIcon.sprite = node.characterIcon;
         speakerIcon.enabled = node.characterIcon != null;
 
-        if (node.voiceClip != null && audioSource != null)
-        {
-            audioSource.clip = node.voiceClip;
-            audioSource.Play();
-        }
-
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
 
         typingCoroutine =
-            StartCoroutine(TypeText(node.dialogueText));
+            StartCoroutine(TypeText(node.dialogueText, node.voiceClip));
     }
 
-    IEnumerator TypeText(string text)
+    IEnumerator TypeText(string text, AudioClip clip)
     {
         dialogueText.text = "";
+
+        StartVoice(clip);
 
         foreach (char letter in text)
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        StopVoice();
 
         ShowChoices();
     }
@@ -193,13 +190,67 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeOptionFlow()
     {
-        dialogueText.text = currentOption.optionText;
+        // NIÑA / PLAYER
+        nameText.text = currentOption.responseCharacterName;
+        nameText.color = currentOption.responseNameColor;
+
+        speakerIcon.sprite = currentOption.responseCharacterIcon;
+        speakerIcon.enabled = currentOption.responseCharacterIcon != null;
+
+        dialogueText.text = "";
+
+        StartVoice(nodes[currentNode].voiceClip);
+
+        foreach (char letter in currentOption.optionText)
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        StopVoice();
+
         yield return new WaitForSeconds(1f);
 
-        dialogueText.text = currentOption.responseText;
+        // RESPUESTA PERSONAJE PRINCIPAL
+        DialogueNode node = nodes[currentNode];
+
+        nameText.text = node.characterName;
+        nameText.color = node.nameColor;
+
+        speakerIcon.sprite = node.characterIcon;
+        speakerIcon.enabled = node.characterIcon != null;
+
+        dialogueText.text = "";
+
+        StartVoice(node.voiceClip);
+
+        foreach (char letter in currentOption.responseText)
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        StopVoice();
+
         yield return new WaitForSeconds(1.5f);
 
         NextNode();
+    }
+
+    void StartVoice(AudioClip clip)
+    {
+        if (audioSource == null || clip == null)
+            return;
+
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    void StopVoice()
+    {
+        if (audioSource != null)
+            audioSource.Stop();
     }
 
     void NextNode()
@@ -250,8 +301,18 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
     }
 
+    public void HideDialogueInstant()
+    {
+        StopVoice();
+
+        if (dialogueCanvasGroup != null)
+            dialogueCanvasGroup.alpha = 0f;
+    }
+
     void EndDialogue()
     {
+        StopVoice();
+
         if (pauseEndFade)
         {
             waitingExternalResume = true;
