@@ -31,6 +31,15 @@ public class ClockManager : MonoBehaviour
     private bool _timerFinished = false;
 
     public float TimerRemainingSeconds => _timerRemainingSeconds;
+    // 🆕 Bandera persistente: el jugador ya entró al loop de juego real
+    private bool _yaEntroAlJuego = false;
+    public bool YaEntroAlJuego => _yaEntroAlJuego;
+
+    public void MarcarEntradaAlJuego()
+    {
+        _yaEntroAlJuego = true;
+        Debug.Log("✅ Jugador entró al juego real.");
+    }
 
     void Awake()
     {
@@ -45,24 +54,21 @@ public class ClockManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // 🔥 Inicializar aquí, no en Start
         _currentTime = DateTime.Today.AddHours(3);
         _lastHourChecked = _currentTime.Hour;
         _lastMinuteChecked = _currentTime.Minute;
 
-        // ✅ Arranque automático: el reloj corre desde el primer frame
         IniciarReloj();
     }
 
     void Start()
     {
-        // Suscribirse con un frame de delay para no contar la escena inicial como "cambio de escena"
         StartCoroutine(RegistrarEventoCambioEscena());
     }
 
     private IEnumerator RegistrarEventoCambioEscena()
     {
-        yield return null; // espera un frame
+        yield return null;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -76,7 +82,6 @@ public class ClockManager : MonoBehaviour
         UpdateTimer();
     }
 
-    // 🟢 ACTIVAR RELOJ
     public void IniciarReloj()
     {
         _relojActivo = true;
@@ -84,11 +89,17 @@ public class ClockManager : MonoBehaviour
         Debug.Log("Reloj iniciado a las 3 AM");
     }
 
-    // ⏩ CAMBIO DE ESCENA
+    // 🆕 NUEVO: detiene completamente el reloj y el timer
+    public void DetenerReloj()
+    {
+        _relojActivo = false;
+        _timerRunning = false;
+        Debug.Log("🛑 Reloj detenido.");
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (!_relojActivo) return;
-
         AdelantarUnaHora();
     }
 
@@ -119,6 +130,7 @@ public class ClockManager : MonoBehaviour
             _timerRemainingSeconds = 0;
             _timerRunning = false;
             _timerFinished = true;
+            DetenerReloj(); // 🆕 detener el reloj al llegar a 0
             OnTimerFinished?.Invoke();
         }
     }
@@ -163,14 +175,12 @@ public class ClockManager : MonoBehaviour
         _isChiming = false;
     }
 
-    // 🔊 FIX ERROR 1
     public void ForceChime(int cantidad = 1)
     {
         if (!_isChiming)
             StartCoroutine(PlayChimes(cantidad));
     }
 
-    // ▶️ FIX ERROR 2
     public void TimerStart()
     {
         IniciarReloj();
