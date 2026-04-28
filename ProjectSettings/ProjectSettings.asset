@@ -40,18 +40,18 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 3b6e5615f0383044ab7b93da3ac11d1a, type: 3}
+  - logo: {fileID: 21300000, guid: 49421c7bcb567bf409e00c8e5c41adb4, type: 3}
     duration: 2
   - logo: {fileID: 21300000, guid: 7f6c7783a47f72648b790be199e9d902, type: 3}
     duration: 2
   - logo: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
     duration: 2
-  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: 3b6e5615f0383044ab7b93da3ac11d1a, type: 3}
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: a4dcab2d4bc84d043a888d3d72c7fd73, type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
-  defaultScreenWidthWeb: 1280
-  defaultScreenHeightWeb: 720
+  defaultScreenWidthWeb: 1920
+  defaultScreenHeightWeb: 1080
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   unsupportedMSAAFallback: 0
@@ -149,7 +149,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.2
+  bundleVersion: 3.0
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   metroInputSource: 0
@@ -307,7 +307,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 242a92805941dd648a522c33ceae9c56, type: 3}
+      m_Icon: {fileID: 2800000, guid: 49421c7bcb567bf409e00c8e5c41adb4, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -817,7 +817,7 @@ PlayerSettings:
   ps4IncludedModules: []
   ps4attribVROutputEnabled: 0
   monoEnv: 
-  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: 3b6e5615f0383044ab7b93da3ac11d1a, type: 3}
+  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: a4dcab2d4bc84d043a888d3d72c7fd73, type: 3}
   splashScreenBackgroundSourcePortrait: {fileID: 21300000, guid: 3678cc30cabbd1849aeae34d01800db9, type: 3}
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
