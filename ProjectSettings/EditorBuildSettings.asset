@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scenes/Gameplay/Cinematica_Oso.unity
     guid: e529f6ae5200cce4b98b59f61523ca46
+  - enabled: 1
+    path: Assets/Project/Scenes/Gameplay/Cinematica_Final_Oso.unity
+    guid: 5560d92efa9d858479b8d9d5f95ad7bb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
