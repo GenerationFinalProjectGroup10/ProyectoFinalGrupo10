@@ -5,6 +5,8 @@ public class MenuManager : MonoBehaviour
 {
     public void StartGame()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene("Dialogos");
     }
 

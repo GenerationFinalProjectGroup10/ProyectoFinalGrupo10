@@ -45,6 +45,8 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         choicesPanel.SetActive(false);
 
         nameText.text = "";
