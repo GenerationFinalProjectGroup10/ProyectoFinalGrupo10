@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 044dd1a965b567149925e42e5e4c0c89, type: 3}
-  m_Name: Frame
+  m_Name: BearEye
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: Portaretrato
-  icon: {fileID: 1375988425, guid: 190a166151fc210408e8c410192e404e, type: 3}
+  itemName: Ojo
+  icon: {fileID: 464377844, guid: 4dca5fb8707e49142a9e16fe46b852bb, type: 3}
   type: 3
-  pickupMessage: "\xA1Has encontrado el portaretrato!, ahora ve por la llave."
+  pickupMessage: "\xA1Has encontrado el ojo del oso!, ahora encuentra la llave."

@@ -14,5 +14,6 @@ public enum ItemType
     Key,
     FramePart,
     ClockPart,
-    Frame
+    Frame,
+    Bear
 }
