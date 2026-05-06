@@ -530,9 +530,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 268522988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b82d0f9ebcf244b4aa2938a12b2430f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 23e71ffb10272c04b840b16355c2d1d0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Door
+  m_EditorClassIdentifier: Assembly-CSharp::DoorTempTest
   requiredKey: {fileID: 11400000, guid: 74c35f4fd567aff4c8865035d446c260, type: 2}
   requiredFrame: {fileID: 11400000, guid: 32006ebb2fa580d4db7e1fc96b9f0b40, type: 2}
   requiredBear: {fileID: 11400000, guid: 9bf183256b915884785f4814f6da95b0, type: 2}
