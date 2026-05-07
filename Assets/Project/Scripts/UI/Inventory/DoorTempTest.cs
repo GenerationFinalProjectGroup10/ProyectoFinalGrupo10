@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Door : MonoBehaviour, IInteractable
+public class DoorTempTest : MonoBehaviour, IInteractable
 {
     [Header("Requirements")]
     [SerializeField] private ItemSO requiredKey;
@@ -33,11 +33,11 @@ public class Door : MonoBehaviour, IInteractable
             return "Presiona E";
         }
         
-        if (scene == "Sotano")
+        if (scene == "Sotano 1")
         {
             return (hasBear && hasFrame) ? "Presiona E" : "Necesitas el Oso y el ojo";
         }
-        else if (scene == "Mundo3")
+        else if (scene == "Mundo3 1")
         {
             return (hasFrame && hasKey) ? "Presiona E para abrir" : "Necesitas el ojo y la Llave";
         }
@@ -63,7 +63,7 @@ public class Door : MonoBehaviour, IInteractable
             return;
         }
 
-        if (scene == "Sotano")
+        if (scene == "Sotano 1")
         {
             if (hasBear && hasFrame)
             {
@@ -73,7 +73,7 @@ public class Door : MonoBehaviour, IInteractable
             }
             else UI_Message.Instance?.ShowTemporary("Necesitas el oso completo para abrir.", 2f);
         }
-        else if (scene == "Mundo3")
+        else if (scene == "Mundo3 1")
         {
             if (hasFrame && hasKey)
             {
